@@ -1,22 +1,10 @@
 const path = require('path');
 const fs = require('fs');
 const { merge } = require('webpack-merge');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
-function getPackageDir(filepath) {
-  let currDir = path.dirname(require.resolve(filepath));
-  while (true) {
-    if (fs.existsSync(path.join(currDir, 'package.json'))) {
-      return currDir;
-    }
-    const { dir, root } = path.parse(currDir);
-    if (dir === root) {
-      throw new Error(
-        `Could not find package.json in the parent directories starting from ${filepath}.`
-      );
-    }
-    currDir = dir;
-  }
-}
+const getPackageDir = (_path: string) =>
+  path.join(process.cwd(), 'node_modules', _path);
 
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -26,6 +14,7 @@ module.exports = {
     '@storybook/addon-postcss',
   ],
   webpackFinal: async (config) => {
+    config.resolve.plugins.push(new TsconfigPathsPlugin({}));
     return merge(config, {
       resolve: {
         alias: {
