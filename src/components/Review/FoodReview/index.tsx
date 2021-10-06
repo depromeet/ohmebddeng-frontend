@@ -15,11 +15,11 @@ const FoodReview = ({ name }: Props, ref: React.Ref<ReviewValue>) => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const target = (event.target as HTMLInputElement).value as TASTE;
-    if (tasteValues.has(target))
-      setTasteValues(
-        (prev) => new Set(Array.from(prev).filter((v) => v !== target))
-      );
-    else setTasteValues((prev) => new Set(prev.add(target)));
+    tasteValues.has(target)
+      ? setTasteValues(
+          (prev) => new Set(Array.from(prev).filter((v) => v !== target))
+        )
+      : setTasteValues((prev) => new Set(prev.add(target)));
   };
 
   useImperativeHandle(

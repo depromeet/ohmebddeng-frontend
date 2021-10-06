@@ -6,7 +6,7 @@ interface Props {
 }
 
 // 아이콘
-const SpicyLevelIcon = ({ level }: Props) => {
+const SpicyLevelIcon = (props: Props) => {
   return <div></div>;
 };
 

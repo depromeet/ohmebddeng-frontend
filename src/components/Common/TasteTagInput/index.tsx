@@ -4,16 +4,11 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   name: TASTE;
 }
 
-const TasteTagInput = ({ name, onChange, checked }: Props) => {
+const TasteTagInput = (props: Props) => {
+  const { name, type, ...rest } = props;
   return (
     <div>
-      <input
-        type="checkbox"
-        name={name}
-        value={name}
-        onChange={onChange}
-        checked={checked}
-      />
+      <input type={type ?? 'checkbox'} name={name} value={name} {...rest} />
       <label htmlFor={name}>#{name}</label>
     </div>
   );
