@@ -31,7 +31,7 @@ const FoodReview = ({ name }: Props, ref: React.Ref<ReviewValue>) => {
   return (
     <section>
       <h2>{name}</h2>
-      <form>
+      <form id="spicyLevelForm">
         {Object.values(LEVEL).map((name) => (
           <SpicyLevelInput
             key={name}
@@ -41,7 +41,7 @@ const FoodReview = ({ name }: Props, ref: React.Ref<ReviewValue>) => {
           />
         ))}
       </form>
-      <form>
+      <form id="tasteForm">
         {Object.values(TASTE).map((name) => (
           <TasteTagInput
             key={name}
