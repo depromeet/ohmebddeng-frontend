@@ -1,19 +1,41 @@
 import React from 'react';
 import { SpicyLevelIcon } from '..';
 import { LEVEL } from '@/types';
+import styled from '@emotion/styled';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   name: LEVEL;
+  checked: boolean;
 }
 
+const Label = styled.label`
+  & input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  & div {
+    display: block !important;
+    cursor: pointer;
+  }
+  & div.name {
+    margin-top: 12px;
+  }
+  & div.disabled {
+    color: #8e8e93;
+  }
+`;
+
 const SpicyLevelInput = (props: Props) => {
-  const { name, type, ...rest } = props;
+  const { name, type, checked, ...rest } = props;
+
   return (
-    <div>
-      <input type={type ?? 'radio'} value={name} {...rest} />
-      <SpicyLevelIcon level={name} />
-      <label htmlFor={name}>{name}</label>
-    </div>
+    <Label>
+      <input type={type ?? 'radio'} value={name} checked={checked} {...rest} />
+      <SpicyLevelIcon level={name} checked={checked} />
+      <div className={'name' + (checked ? '' : ' disabled')}>{name}</div>
+    </Label>
   );
 };
 
