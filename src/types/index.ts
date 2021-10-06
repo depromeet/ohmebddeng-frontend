@@ -12,3 +12,8 @@ export enum TASTE {
   매워요 = '매워요',
   달달해요 = '달달해요',
 }
+
+export interface ReviewValue {
+  levelValue: string;
+  tasteValue: string[];
+}

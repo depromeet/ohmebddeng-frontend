@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
-import { LEVEL, TASTE } from '@/types';
+import { LEVEL, TASTE, ReviewValue } from '@/types';
 import { SpicyLevelInput, TasteTagInput } from '@/components/Common';
 import useInput from '@/hooks/useInput';
 
@@ -7,14 +7,14 @@ interface Props {
   name: string;
 }
 
-const FoodReview = ({ name }: Props, ref: React.Ref<any>) => {
+const FoodReview = ({ name }: Props, ref: React.Ref<ReviewValue>) => {
   const [levelValue, levelValueChangeHandler] = useInput();
-  const [tasteValues, setTasteValues] = useState<Set<string>>(new Set());
+  const [tasteValues, setTasteValues] = useState<Set<TASTE>>(new Set());
 
   const tasteValueChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const target = (event.target as HTMLInputElement).value;
+    const target = (event.target as HTMLInputElement).value as TASTE;
     if (tasteValues.has(target))
       setTasteValues(
         (prev) => new Set(Array.from(prev).filter((v) => v !== target))

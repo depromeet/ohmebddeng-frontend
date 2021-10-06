@@ -1,14 +1,15 @@
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef } from 'react';
+import { ReviewValue } from '@/types';
 import FoodReview from '@/components/Review/FoodReview';
 
 const Review: NextPage = () => {
   const router = useRouter();
 
-  const food1 = useRef<any>();
-  const food2 = useRef<any>();
-  const food3 = useRef<any>();
+  const food1 = useRef<ReviewValue>({ levelValue: '', tasteValue: [] });
+  const food2 = useRef<ReviewValue>({ levelValue: '', tasteValue: [] });
+  const food3 = useRef<ReviewValue>({ levelValue: '', tasteValue: [] });
 
   const handleSubmit = () => {
     const { levelValue: food1LevelValue, tasteValue: food1TasteValue } =
