@@ -7,7 +7,7 @@ initMSW();
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      {GlobalStyle}
+      <GlobalStyle />
       <Component {...pageProps} />
     </>
   );
