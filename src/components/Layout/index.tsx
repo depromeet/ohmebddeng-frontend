@@ -14,7 +14,7 @@ const Layout = ({ children }: Props) => {
 };
 
 const Main = styled.main`
-  width: 350px;
+  width: 375px;
   & h1 {
     font-weight: normal;
     font-size: 17px;
@@ -24,7 +24,7 @@ const Main = styled.main`
     font-weight: normal;
     font-size: 22px;
   }
-  @media (max-width: 350px) {
+  @media (max-width: 375px) {
     width: 100%;
   }
 `;

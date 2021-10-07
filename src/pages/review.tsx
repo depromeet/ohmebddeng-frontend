@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import React, { useRef } from 'react';
 import { INITIAL_FOOD, ReviewValue } from '@/types';
 import FoodReview from '@/components/Review/FoodReview';
+import TitleBar from '@/components/Common/TitleBar';
 import styled from '@emotion/styled';
 
 const Review: NextPage = () => {
@@ -34,7 +35,11 @@ const Review: NextPage = () => {
 
   return (
     <Container>
-      <h1>당신의 매운 느낌을 표현해주세요</h1>
+      <TitleBar
+        backButton={true}
+        backLocation="/"
+        content="당신의 매운 느낌을 표현해주세요"
+      />
       <FoodReview name={INITIAL_FOOD.FOOD1} ref={food1} />
       <FoodReview name={INITIAL_FOOD.FOOD2} ref={food2} />
       <FoodReview name={INITIAL_FOOD.FOOD3} ref={food3} />
@@ -44,6 +49,7 @@ const Review: NextPage = () => {
 };
 
 const Container = styled.div`
+  margin: 0 16px 0 17px;
   height: 100%;
   display: flex;
   flex-direction: column;
