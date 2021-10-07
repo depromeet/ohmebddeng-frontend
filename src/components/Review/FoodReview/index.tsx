@@ -83,7 +83,8 @@ const H2 = styled.h2`
 
 const SpicyLevelForm = styled.form`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 0 24px;
 `;
 
 const TasteForm = styled.form`
