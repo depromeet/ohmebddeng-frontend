@@ -14,13 +14,13 @@ const Template: ComponentStory<typeof TasteTagInput> = (args) => (
 export const Unchecked = Template.bind({});
 
 Unchecked.args = {
-  name: TASTE.끝맛이매워요,
+  name: TASTE.매콤달콤한,
   checked: false,
 };
 
 export const Checked = Template.bind({});
 
 Checked.args = {
-  name: TASTE.끝맛이매워요,
+  name: TASTE.매콤달콤한,
   checked: true,
 };
