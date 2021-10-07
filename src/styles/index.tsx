@@ -4,10 +4,16 @@ export const GlobalStyle = () => {
   return (
     <Global
       styles={css`
+        @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
         *,
         *::before,
         *::after {
           box-sizing: border-box;
+        }
+
+        * {
+          font-family: 'NanumSquare';
         }
 
         body,
