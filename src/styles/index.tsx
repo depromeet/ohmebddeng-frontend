@@ -36,6 +36,17 @@ export const GlobalStyle = () => {
           min-height: 100vh;
           text-rendering: optimizeSpeed;
           line-height: 1.5;
+          display: flex;
+          justify-content: center;
+          background-color: black;
+          font-family: NanumSquareOTF;
+          text-align: center;
+          color: #ffffff;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 13px;
+          line-height: 140%;
+          letter-spacing: 1.66667px;
         }
         a:not([class]) {
           text-decoration-skip-ink: auto;

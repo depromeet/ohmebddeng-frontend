@@ -65,7 +65,7 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 350px;
+  width: 100%;
   height: 315px;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 16px;

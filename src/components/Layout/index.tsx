@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 interface Props {
   children?: React.ReactNode;
 }
-
+// TODO : Header 컴포넌트 추가
 const Layout = ({ children }: Props) => {
   return (
     <>
@@ -14,18 +14,7 @@ const Layout = ({ children }: Props) => {
 };
 
 const Main = styled.main`
-  display: flex;
-  justify-content: center;
-
-  background-color: black;
-  font-family: NanumSquareOTF;
-  text-align: center;
-  color: #ffffff;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 13px;
-  line-height: 140%;
-  letter-spacing: 1.66667px;
+  width: 350px;
   & h1 {
     font-weight: normal;
     font-size: 17px;
@@ -34,6 +23,9 @@ const Main = styled.main`
     font-family: SB AggroOTF;
     font-weight: normal;
     font-size: 22px;
+  }
+  @media (max-width: 350px) {
+    width: 100%;
   }
 `;
 
