@@ -3,6 +3,28 @@ import { useRouter } from 'next/router';
 import React, { useRef } from 'react';
 import { ReviewValue } from '@/types';
 import FoodReview from '@/components/Review/FoodReview';
+import styled from '@emotion/styled';
+
+const Main = styled.main`
+  background-color: black;
+  font-family: NanumSquareOTF;
+  text-align: center;
+  color: #ffffff;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 140%;
+  letter-spacing: 1.66667px;
+  & h1 {
+    font-weight: normal;
+    font-size: 17px;
+  }
+  & h2 {
+    font-family: SB AggroOTF;
+    font-weight: normal;
+    font-size: 22px;
+  }
+`;
 
 const Review: NextPage = () => {
   const router = useRouter();
@@ -42,13 +64,13 @@ const Review: NextPage = () => {
   };
 
   return (
-    <main>
-      <h1>리뷰</h1>
+    <Main>
+      <h1>당신의 매운 느낌을 표현해주세요</h1>
       <FoodReview name="진라면 매운맛" ref={food1} />
       <FoodReview name="엽기떡볶이" ref={food2} />
       <FoodReview name="매운거 암궈나" ref={food3} />
-      <button onClick={handleSubmit}>확인</button>
-    </main>
+      <button onClick={handleSubmit}>완료</button>
+    </Main>
   );
 };
 
