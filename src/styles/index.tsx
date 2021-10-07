@@ -79,6 +79,22 @@ export const GlobalStyle = () => {
             scroll-behavior: auto !important;
           }
         }
+
+        @font-face {
+          font-family: 'SB AggroOTF';
+          src: url('assets/fonts/SB-Aggro-OTF-B.otf');
+          font-style: normal;
+          font-weight: 400;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: 'SB AggroOTF';
+          src: url('assets/fonts/SB-Aggro-OTF-M.otf');
+          font-style: medium;
+          font-weight: 500;
+          font-display: swap;
+        }
       `}
     />
   );
