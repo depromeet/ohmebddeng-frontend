@@ -1,4 +1,5 @@
 import React from 'react';
+import { INITIAL_FOOD } from '@/types';
 import { ComponentMeta } from '@storybook/react';
 import FoodReview from '.';
 
@@ -7,4 +8,4 @@ export default {
   component: FoodReview,
 } as ComponentMeta<typeof FoodReview>;
 
-export const FoodReviewStory = () => <FoodReview name={'진라면 매운맛'} />;
+export const FoodReviewStory = () => <FoodReview name={INITIAL_FOOD.FOOD1} />;

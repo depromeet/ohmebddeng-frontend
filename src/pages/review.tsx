@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef } from 'react';
-import { ReviewValue } from '@/types';
+import { INITIAL_FOOD, ReviewValue } from '@/types';
 import FoodReview from '@/components/Review/FoodReview';
 import styled from '@emotion/styled';
 
@@ -35,9 +35,9 @@ const Review: NextPage = () => {
   return (
     <Container>
       <h1>당신의 매운 느낌을 표현해주세요</h1>
-      <FoodReview name="진라면 매운맛" ref={food1} />
-      <FoodReview name="불닭볶음면" ref={food2} />
-      <FoodReview name="신라면" ref={food3} />
+      <FoodReview name={INITIAL_FOOD.FOOD1} ref={food1} />
+      <FoodReview name={INITIAL_FOOD.FOOD2} ref={food2} />
+      <FoodReview name={INITIAL_FOOD.FOOD3} ref={food3} />
       <Button onClick={handleSubmit}>완료</Button>
     </Container>
   );

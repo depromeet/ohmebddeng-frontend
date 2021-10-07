@@ -1,13 +1,13 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import Image from 'next/image';
-import { LEVEL, TASTE, ReviewValue } from '@/types';
+import { LEVEL, TASTE, INITIAL_FOOD, ReviewValue } from '@/types';
 import { SpicyLevelInput, TasteTagInput } from '@/components/Common';
 import svg_0 from 'public/assets/FoodReview/0.svg';
 import styled from '@emotion/styled';
 import useInput from '@/hooks/useInput';
 
 interface Props {
-  name: string;
+  name: INITIAL_FOOD;
 }
 
 const FoodReview = ({ name }: Props, ref: React.Ref<ReviewValue>) => {
