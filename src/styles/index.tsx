@@ -43,7 +43,6 @@ export const GlobalStyle = () => {
           text-rendering: optimizeSpeed;
           line-height: 1.5;
         }
-
         a:not([class]) {
           text-decoration-skip-ink: auto;
         }

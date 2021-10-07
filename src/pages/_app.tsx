@@ -1,6 +1,7 @@
 import { initMSW } from '@/lib/msw';
 import { GlobalStyle } from '@/styles';
 import type { AppProps } from 'next/app';
+import Layout from '@/components/Layout';
 
 initMSW();
 
@@ -8,7 +9,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <GlobalStyle />
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 }
