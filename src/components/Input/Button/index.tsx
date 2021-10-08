@@ -6,11 +6,12 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   buttonType: 'contained' | 'outline';
   color: 'green' | 'red' | 'grey';
   rounded: boolean;
+  children?: React.ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
+export default function Button({ children, ...props }: ButtonProps) {
   return <StyledButton {...props}>{children}</StyledButton>;
-};
+}
 
 const StyledButton = styled.button<ButtonProps>`
   padding: 20px;
@@ -59,5 +60,3 @@ const getColor = (color: string) => {
     ? '#FF5252'
     : '#8E8E93';
 };
-
-export default Button;
