@@ -4,6 +4,7 @@ import React, { useRef } from 'react';
 import { INITIAL_FOOD, ReviewValue } from '@/types';
 import FoodReview from '@/components/Review/FoodReview';
 import TitleBar from '@/components/Common/TitleBar';
+import Button from '@/components/Input/Button';
 import styled from '@emotion/styled';
 
 const Review: NextPage = () => {
@@ -43,7 +44,14 @@ const Review: NextPage = () => {
       <FoodReview name={INITIAL_FOOD.FOOD1} ref={food1} />
       <FoodReview name={INITIAL_FOOD.FOOD2} ref={food2} />
       <FoodReview name={INITIAL_FOOD.FOOD3} ref={food3} />
-      <Button onClick={handleSubmit}>완료</Button>
+      <Button
+        buttonType={'contained'}
+        color={true ? 'red' : 'grey'}
+        rounded={false}
+        onClick={handleSubmit}
+      >
+        완료
+      </Button>
     </Container>
   );
 };
@@ -55,7 +63,5 @@ const Container = styled.div`
   flex-direction: column;
   gap: 20px 0;
 `;
-
-const Button = styled.button``;
 
 export default Review;
