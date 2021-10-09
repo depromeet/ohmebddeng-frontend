@@ -14,13 +14,13 @@ const Layout = ({ children }: Props) => {
 };
 
 const Main = styled.main`
-  width: 350px;
+  width: 414px;
   & h1 {
     font-weight: normal;
     font-size: 17px;
   }
   & h2 {
-    font-family: SB AggroOTF;
+    font-family: SBAggroB;
     font-weight: normal;
     font-size: 22px;
   }

@@ -87,19 +87,11 @@ export const GlobalStyle = () => {
         }
 
         @font-face {
-          font-family: 'SB AggroOTF';
-          src: url('assets/fonts/SB-Aggro-OTF-B.otf');
+          font-family: 'SBAggroB';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff')
+            format('woff');
+          font-weight: normal;
           font-style: normal;
-          font-weight: 400;
-          font-display: swap;
-        }
-
-        @font-face {
-          font-family: 'SB AggroOTF';
-          src: url('assets/fonts/SB-Aggro-OTF-M.otf');
-          font-style: medium;
-          font-weight: 500;
-          font-display: swap;
         }
       `}
     />
