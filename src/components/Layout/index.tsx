@@ -24,7 +24,7 @@ const Main = styled.main`
     font-weight: normal;
     font-size: 22px;
   }
-  @media (max-width: 350px) {
+  @media (max-width: 375px) {
     width: 100%;
   }
 `;
