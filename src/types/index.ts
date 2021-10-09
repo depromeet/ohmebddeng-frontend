@@ -20,7 +20,7 @@ export enum INITIAL_FOOD {
   FOOD3 = '신라면',
 }
 
-export interface ReviewValue {
-  levelValue: string;
-  tasteValue: string[];
+export interface ReviewState {
+  level?: LEVEL;
+  taste?: Set<TASTE>;
 }

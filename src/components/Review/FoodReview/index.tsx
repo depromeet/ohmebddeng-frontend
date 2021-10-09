@@ -1,36 +1,25 @@
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import { LEVEL, TASTE, INITIAL_FOOD, ReviewValue } from '@/types';
+import { LEVEL, TASTE } from '@/types';
 import { SpicyLevelInput, TasteTagInput } from '@/components/Common';
 import svg_0 from 'public/assets/FoodReview/0.svg';
 import styled from '@emotion/styled';
-import useInput from '@/hooks/useInput';
 
 interface Props {
-  name: INITIAL_FOOD;
+  name: string;
+  level?: LEVEL;
+  taste?: Set<TASTE>;
+  handleChangeLevel: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChangeTaste: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FoodReview = ({ name }: Props, ref: React.Ref<ReviewValue>) => {
-  const [levelValue, levelValueChangeHandler] = useInput();
-  const [tasteValues, setTasteValues] = useState<Set<TASTE>>(new Set());
-
-  const tasteValueChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const target = (event.target as HTMLInputElement).value as TASTE;
-    tasteValues.has(target)
-      ? setTasteValues(
-          (prev) => new Set(Array.from(prev).filter((v) => v !== target))
-        )
-      : setTasteValues((prev) => new Set(prev.add(target)));
-  };
-
-  useImperativeHandle(
-    ref,
-    () => ({ levelValue, tasteValue: Array.from(tasteValues) }),
-    [levelValue, tasteValues]
-  );
-
+const FoodReview = ({
+  name,
+  level,
+  taste,
+  handleChangeLevel,
+  handleChangeTaste,
+}: Props) => {
   return (
     <Container>
       <Title>
@@ -42,8 +31,8 @@ const FoodReview = ({ name }: Props, ref: React.Ref<ReviewValue>) => {
           <SpicyLevelInput
             key={name}
             name={name}
-            onChange={levelValueChangeHandler}
-            checked={levelValue === name}
+            onChange={handleChangeLevel}
+            checked={level === name}
           />
         ))}
       </SpicyLevelForm>
@@ -52,8 +41,8 @@ const FoodReview = ({ name }: Props, ref: React.Ref<ReviewValue>) => {
           <TasteTagInput
             key={name}
             name={name}
-            onChange={tasteValueChangeHandler}
-            checked={tasteValues.has(name)}
+            onChange={handleChangeTaste}
+            checked={taste && taste.has(name)}
           />
         ))}
       </TasteForm>
@@ -95,4 +84,4 @@ const TasteForm = styled.form`
   border-top: 1px solid #3a3a3c;
 `;
 
-export default forwardRef(FoodReview);
+export default FoodReview;
