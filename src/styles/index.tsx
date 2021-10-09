@@ -42,8 +42,18 @@ export const GlobalStyle = () => {
           min-height: 100vh;
           text-rendering: optimizeSpeed;
           line-height: 1.5;
+          display: flex;
+          justify-content: center;
+          background-color: black;
+          font-family: NanumSquareOTF;
+          text-align: center;
+          color: #ffffff;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 13px;
+          line-height: 140%;
+          letter-spacing: 1.66667px;
         }
-
         a:not([class]) {
           text-decoration-skip-ink: auto;
         }
@@ -74,6 +84,14 @@ export const GlobalStyle = () => {
             transition-duration: 0.01ms !important;
             scroll-behavior: auto !important;
           }
+        }
+
+        @font-face {
+          font-family: 'SBAggroB';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff')
+            format('woff');
+          font-weight: normal;
+          font-style: normal;
         }
       `}
     />

@@ -3,6 +3,7 @@ import { GlobalStyle } from '@/styles';
 import theme from '@/styles/theme';
 import { ThemeProvider } from '@emotion/react';
 import type { AppProps } from 'next/app';
+import Layout from '@/components/Layout';
 
 initMSW();
 
@@ -11,7 +12,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </>
   );
