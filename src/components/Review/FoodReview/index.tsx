@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
-import { LEVEL, TASTE, ReviewValue } from '@/types';
 import { SpicyLevelInput, TasteTagInput } from '@/components/Common';
 import useInput from '@/hooks/useInput';
+import { LEVEL, TASTE, ReviewValue } from '@/types';
 
 interface Props {
   name: string;
