@@ -1,8 +1,9 @@
 import { initMSW } from '@/lib/msw';
 import { GlobalStyle } from '@/styles';
+import theme from '@/styles/theme';
+import { ThemeProvider } from '@emotion/react';
 import type { AppProps } from 'next/app';
 import Layout from '@/components/Layout';
-import Head from 'next/head';
 
 initMSW();
 
@@ -10,9 +11,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <GlobalStyle />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ThemeProvider theme={theme}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
     </>
   );
 }
