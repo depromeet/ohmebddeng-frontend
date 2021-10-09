@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, Theme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { HTMLAttributes } from 'markdown-to-jsx/node_modules/@types/react';
 
@@ -29,20 +29,20 @@ const StyledButton = styled.button<ButtonProps>`
   outline: none;
   cursor: pointer;
 
-  ${({ buttonType, color }) =>
+  ${({ buttonType, color, theme }) =>
     buttonType === 'contained' &&
     css`
-      color: ${color === 'green' ? '#131313' : 'white'};
-      background: ${getColor(color)};
+      color: ${color === 'green' ? theme.colors.black : theme.colors.white};
+      background: ${getColor(color, theme)};
     `}
 
-  ${({ buttonType, color }) =>
+  ${({ buttonType, color, theme }) =>
     buttonType === 'outline' &&
     css`
-      border: 1px solid ${getColor(color)};
+      border: 1px solid ${getColor(color, theme)};
       :hover {
-        color: ${color === 'green' ? '#131313' : 'white'};
-        background-color: ${getColor(color)};
+        color: ${color === 'green' ? theme.colors.black : theme.colors.white};
+        background-color: ${getColor(color, theme)};
       }
     `}
 
@@ -53,10 +53,10 @@ const StyledButton = styled.button<ButtonProps>`
     `}
 `;
 
-const getColor = (color: string) => {
+const getColor = (color: string, theme: Theme) => {
   return color === 'green'
-    ? '#69ff7a'
+    ? theme.colors.green
     : color === 'red'
-    ? '#FF5252'
-    : '#8E8E93';
+    ? theme.colors.red
+    : theme.colors.grey10;
 };
