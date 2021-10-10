@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef } from 'react';
-import { ReviewValue } from '@/types';
 import FoodReview from '@/components/Review/FoodReview';
+import { ReviewValue } from '@/types';
 
 const Review: NextPage = () => {
   const router = useRouter();

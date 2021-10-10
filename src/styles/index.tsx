@@ -44,7 +44,7 @@ export const GlobalStyle = () => {
           line-height: 1.5;
           display: flex;
           justify-content: center;
-          background-color: black;
+          background-color: #1f1f1f;
           font-family: NanumSquareOTF;
           text-align: center;
           color: #ffffff;

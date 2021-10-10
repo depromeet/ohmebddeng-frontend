@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
 
 interface Props {
   children?: React.ReactNode;
@@ -14,7 +14,10 @@ const Layout = ({ children }: Props) => {
 };
 
 const Main = styled.main`
-  width: 414px;
+  width: 100vw;
+  max-width: 414px;
+  height: 100%;
+
   & h1 {
     font-weight: normal;
     font-size: 17px;
@@ -23,9 +26,6 @@ const Main = styled.main`
     font-family: SBAggroB;
     font-weight: normal;
     font-size: 22px;
-  }
-  @media (max-width: 350px) {
-    width: 100%;
   }
 `;
 
