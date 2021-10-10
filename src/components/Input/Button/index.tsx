@@ -6,7 +6,6 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   buttonType: 'contained' | 'outline';
   color: 'green' | 'red' | 'grey';
   rounded: boolean;
-  marginTop?: number;
   fullWidth?: boolean;
   children?: React.ReactNode;
 }
@@ -52,11 +51,6 @@ const StyledButton = styled.button<ButtonProps>`
     css`
       border-radius: 100px;
     `};
-  ${({ marginTop }) =>
-    marginTop &&
-    css`
-      margin-top: ${marginTop}px;
-    `}
 `;
 
 const getColor = (color: string, theme: Theme) => {

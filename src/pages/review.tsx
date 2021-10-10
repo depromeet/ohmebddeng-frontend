@@ -69,23 +69,23 @@ const Review: NextPage = () => {
       <TitleBar backButton={true} backLocation="/">
         당신의 매운 느낌을 표현해주세요
       </TitleBar>
-      {!isLoading &&
-        Object.keys(Object.fromEntries(reviews)).map((foodName) => {
-          const data = reviews.get(foodName);
-          return (
-            <FoodReview
-              name={foodName}
-              key={foodName}
-              level={data?.level}
-              taste={data?.taste}
-              onChangeLevel={handleCheckLevel(foodName)}
-              onChangeTaste={handleCheckTaste(foodName)}
-            />
-          );
-        })}
-
+      <Content>
+        {!isLoading &&
+          Object.keys(Object.fromEntries(reviews)).map((foodName) => {
+            const data = reviews.get(foodName);
+            return (
+              <FoodReview
+                name={foodName}
+                key={foodName}
+                level={data?.level}
+                taste={data?.taste}
+                onChangeLevel={handleCheckLevel(foodName)}
+                onChangeTaste={handleCheckTaste(foodName)}
+              />
+            );
+          })}
+      </Content>
       <Button
-        marginTop={60}
         buttonType={'contained'}
         color={isAllChecked ? 'red' : 'grey'}
         rounded={false}
@@ -98,8 +98,13 @@ const Review: NextPage = () => {
 };
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   margin: 0 16px 0 17px;
   height: 100%;
+`;
+const Content = styled.div`
+  margin: 16px 0 80px;
   display: flex;
   flex-direction: column;
   gap: 20px 0;

@@ -8,7 +8,6 @@ import arrow_back from 'public/assets/common/arrow_back.svg';
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   backButton: boolean;
   backLocation?: string;
-  marginBottom?: number;
   children?: React.ReactNode;
 }
 
@@ -29,7 +28,7 @@ export default function TitleBar({ children, ...props }: Props) {
 
 const Container = styled.div<Props>`
   height: 56px;
-  padding: 17px 0 10px;
+  padding: 17px 0 15px;
   position: relative;
   & div {
     cursor: pointer;
@@ -44,9 +43,4 @@ const Container = styled.div<Props>`
     margin-right: auto;
     line-height: 140%;
   }
-  ${({ marginBottom }) =>
-    marginBottom &&
-    css`
-      margin-bottom: ${marginBottom}px;
-    `}
 `;

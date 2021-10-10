@@ -1,6 +1,6 @@
+import styled from '@emotion/styled';
 import React from 'react';
 import { TASTE } from '@/types';
-import styled from '@emotion/styled';
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   name: TASTE;
 }
