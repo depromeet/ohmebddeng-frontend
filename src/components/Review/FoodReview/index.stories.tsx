@@ -1,6 +1,4 @@
 import { ComponentMeta } from '@storybook/react';
-import React from 'react';
-import { INITIAL_FOOD } from '@/types';
 import FoodReview from '.';
 
 export default {
@@ -8,4 +6,6 @@ export default {
   component: FoodReview,
 } as ComponentMeta<typeof FoodReview>;
 
-export const FoodReviewStory = () => <FoodReview name={INITIAL_FOOD.FOOD1} />;
+// export const FoodReviewStory = () =>
+// <FoodReview name={INITIAL_FOOD.FOOD1}
+// level={LEVEL.냠냠} taste={}/>;
