@@ -34,6 +34,10 @@ const Review: NextPage = () => {
   }, [reviews]);
 
   const handleSubmit = () => {
+    if (!isAllChecked) {
+      alert('선택을 완료해주세요');
+      return;
+    }
     router.push('/testResult');
   };
 
@@ -76,8 +80,8 @@ const Review: NextPage = () => {
               key={foodName}
               level={data?.level}
               taste={data?.taste}
-              handleChangeLevel={handleCheckLevel(foodName)}
-              handleChangeTaste={handleCheckTaste(foodName)}
+              onChangeLevel={handleCheckLevel(foodName)}
+              onChangeTaste={handleCheckTaste(foodName)}
             />
           );
         })}
