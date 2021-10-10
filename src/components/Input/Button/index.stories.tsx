@@ -14,15 +14,14 @@ export default {
   ],
 } as Meta<typeof Button>;
 
-const Template: Story<ButtonProps> = (args) => (
-  <Button {...args} style={{ width: '100%' }} />
-);
+const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 
 export const Contained = Template.bind({});
 Contained.args = {
   buttonType: 'contained',
   color: 'red',
   children: '완료',
+  fullWidth: true,
 };
 
 export const Outline = Template.bind({});
@@ -31,4 +30,5 @@ Outline.args = {
   color: 'green',
   rounded: true,
   children: '매워서 못 먹어요',
+  fullWidth: true,
 };
