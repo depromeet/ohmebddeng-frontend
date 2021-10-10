@@ -62,11 +62,9 @@ const Review: NextPage = () => {
 
   return (
     <Container>
-      <TitleBar
-        backButton={true}
-        backLocation="/"
-        content="당신의 매운 느낌을 표현해주세요"
-      />
+      <TitleBar backButton={true} backLocation="/">
+        당신의 매운 느낌을 표현해주세요
+      </TitleBar>
       {!isLoading &&
         Object.keys(Object.fromEntries(reviews)).map((foodName) => {
           const data = reviews.get(foodName);
@@ -83,6 +81,7 @@ const Review: NextPage = () => {
         })}
 
       <Button
+        marginTop={60}
         buttonType={'contained'}
         color={isAllChecked ? 'red' : 'grey'}
         rounded={false}

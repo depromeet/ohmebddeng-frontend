@@ -1,6 +1,6 @@
+import { ComponentMeta } from '@storybook/react';
 import React from 'react';
 import { INITIAL_FOOD } from '@/types';
-import { ComponentMeta } from '@storybook/react';
 import FoodReview from '.';
 
 export default {

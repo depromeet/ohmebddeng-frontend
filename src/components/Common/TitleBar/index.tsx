@@ -1,53 +1,52 @@
-import { useRouter } from 'next/router';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import arrow_back from 'public/assets/common/arrow_back.svg';
+import { HTMLAttributes } from 'markdown-to-jsx/node_modules/@types/react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import arrow_back from 'public/assets/common/arrow_back.svg';
 
-interface Props {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
   backButton: boolean;
-  backLocation: string;
-  content: string;
+  backLocation?: string;
+  marginBottom?: number;
+  children?: React.ReactNode;
 }
 
-const Container = styled.div`
-  height: 51px;
-  padding: 17px 0;
+export default function TitleBar({ children, ...props }: Props) {
+  const { backButton, backLocation = '/' } = props;
+  const router = useRouter();
+  const moveLocation = () => router.push(backLocation);
+
+  return (
+    <Container {...props}>
+      {backButton && (
+        <Image onClick={moveLocation} src={arrow_back} alt={arrow_back} />
+      )}
+      <h1>{children}</h1>
+    </Container>
+  );
+}
+
+const Container = styled.div<Props>`
+  height: 56px;
+  padding: 17px 0 10px;
+  position: relative;
   & div {
     cursor: pointer;
     float: left;
   }
   & h1 {
-    /* 
-    가운데 정렬 주석입니다.
-    가운데 정렬은 맞는데 폰트 느낌이 달라 피그마랑 다르게
-    표시 되고 있어서 임시 주석처리 했습니다. :joy:
-    */
-    /* 
     position: absolute;
-    left: 0;
-    right: 0;
+    top: 17px;
+    left: 30px;
+    right: 30px;
     margin-left: auto;
-    margin-right: auto; */
+    margin-right: auto;
     line-height: 140%;
   }
+  ${({ marginBottom }) =>
+    marginBottom &&
+    css`
+      margin-bottom: ${marginBottom}px;
+    `}
 `;
-
-const TitleBar = (props: Props) => {
-  const { backButton = false, backLocation = '/', content } = props;
-  const router = useRouter();
-
-  const moveLocation = () => {
-    router.push(backLocation);
-  };
-
-  return (
-    <Container>
-      {backButton && (
-        <Image onClick={moveLocation} src={arrow_back} alt={arrow_back} />
-      )}
-      <h1>{content}</h1>
-    </Container>
-  );
-};
-
-export default TitleBar;

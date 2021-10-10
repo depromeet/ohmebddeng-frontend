@@ -1,6 +1,7 @@
 import React from 'react';
 import * as nextImage from 'next/image';
 import { GlobalStyle } from '@/styles';
+import Layout from '@/components/Layout';
 import { Story } from '@storybook/react';
 import { ThemeProvider } from '@emotion/react';
 import theme from '@/styles/theme';
@@ -11,7 +12,9 @@ export const decorators = [
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <Story />
+        <Layout>
+          <Story />
+        </Layout>
       </ThemeProvider>
     </>
   ),
@@ -27,8 +30,11 @@ export const parameters = {
   },
 };
 
-
 Object.defineProperty(nextImage, 'default', {
   configurable: true,
-  value: props => <img {...props} />
+  value: (
+    props: JSX.IntrinsicAttributes &
+      React.ClassAttributes<HTMLImageElement> &
+      React.ImgHTMLAttributes<HTMLImageElement>
+  ) => <img {...props} />,
 });
