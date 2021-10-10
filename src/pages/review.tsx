@@ -1,11 +1,11 @@
+import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import { INITIAL_FOOD, LEVEL, TASTE, ReviewState } from '@/types';
-import FoodReview from '@/components/Review/FoodReview';
 import TitleBar from '@/components/Common/TitleBar';
 import Button from '@/components/Input/Button';
-import styled from '@emotion/styled';
+import FoodReview from '@/components/Review/FoodReview';
+import { INITIAL_FOOD, LEVEL, TASTE, ReviewState } from '@/types';
 
 const Review: NextPage = () => {
   const router = useRouter();

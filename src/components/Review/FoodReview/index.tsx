@@ -1,9 +1,9 @@
-import React from 'react';
-import Image from 'next/image';
-import { LEVEL, TASTE } from '@/types';
-import { SpicyLevelInput, TasteTagInput } from '@/components/Common';
-import svg_0 from 'public/assets/FoodReview/0.svg';
 import styled from '@emotion/styled';
+import Image from 'next/image';
+import React from 'react';
+import { SpicyLevelInput, TasteTagInput } from '@/components/Common';
+import { LEVEL, TASTE } from '@/types';
+import svg_0 from 'public/assets/FoodReview/0.svg';
 
 interface Props {
   name: string;

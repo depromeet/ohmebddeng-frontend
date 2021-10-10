@@ -1,7 +1,7 @@
-import React from 'react';
-import { SpicyLevelIcon } from '..';
-import { LEVEL } from '@/types';
 import styled from '@emotion/styled';
+import React from 'react';
+import { LEVEL } from '@/types';
+import { SpicyLevelIcon } from '..';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   name: LEVEL;
