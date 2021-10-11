@@ -10,9 +10,7 @@ import { INITIAL_FOOD, LEVEL, TASTE, ReviewState } from '@/types';
 import svg_0 from 'public/assets/FoodReview/0.svg';
 
 const init_food = [
-  {
-    name: INITIAL_FOOD.FOOD1,
-  },
+  { name: INITIAL_FOOD.FOOD1 },
   { name: INITIAL_FOOD.FOOD2 },
   { name: INITIAL_FOOD.FOOD3 },
 ];
