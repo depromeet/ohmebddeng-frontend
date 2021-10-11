@@ -3,12 +3,12 @@ import React from 'react';
 import { TasteTagInput } from '@/components/Common';
 import { TASTE } from '@/types';
 
-interface Props {
+export interface TasteFormProps {
   taste?: Set<TASTE>;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const TasteForm = ({ taste, ...props }: Props) => {
+const TasteForm = ({ taste, ...props }: TasteFormProps) => {
   return (
     <Form id="spicyLevelForm">
       {Object.values(TASTE).map((name) => (

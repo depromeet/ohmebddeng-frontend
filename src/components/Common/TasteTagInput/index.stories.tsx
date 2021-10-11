@@ -1,14 +1,14 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import React from 'react';
 import { TASTE } from '@/types';
-import TasteTagInput from '.';
+import TasteTagInput, { TasteTagInputProps } from '.';
 
 export default {
   title: 'Common/TasteTagInput',
   component: TasteTagInput,
-} as ComponentMeta<typeof TasteTagInput>;
+} as Meta<typeof TasteTagInput>;
 
-const Template: ComponentStory<typeof TasteTagInput> = (args) => (
+const Template: Story<TasteTagInputProps> = (args) => (
   <TasteTagInput {...args} />
 );
 export const Unchecked = Template.bind({});

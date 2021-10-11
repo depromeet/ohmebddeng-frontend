@@ -1,6 +1,6 @@
 import { Story, Meta } from '@storybook/react';
 import React from 'react';
-import TitleBar, { Props } from '.';
+import TitleBar, { TitleBarProps } from '.';
 
 export default {
   title: 'Common/TitleBar',
@@ -14,7 +14,7 @@ export default {
   ],
 } as Meta<typeof TitleBar>;
 
-const Template: Story<Props> = (args) => (
+const Template: Story<TitleBarProps> = (args) => (
   <TitleBar {...args} style={{ width: '100%' }}>
     헤더에 들어갈 내용
   </TitleBar>

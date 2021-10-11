@@ -10,13 +10,13 @@ import svg_2_disabled from 'public/assets/SpciyLevelInput/2_disabled.svg';
 import svg_3 from 'public/assets/SpciyLevelInput/3.svg';
 import svg_3_disabled from 'public/assets/SpciyLevelInput/3_disabled.svg';
 
-interface Props {
+interface SpicyLevelIconProps {
   level: LEVEL;
   checked: boolean;
 }
 
 // 아이콘
-const SpicyLevelIcon = (props: Props) => {
+const SpicyLevelIcon = (props: SpicyLevelIconProps) => {
   const { level, checked } = props;
 
   switch (level) {

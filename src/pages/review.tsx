@@ -9,6 +9,14 @@ import { SpicyLevelForm, TasteForm } from '@/components/Review';
 import { INITIAL_FOOD, LEVEL, TASTE, ReviewState } from '@/types';
 import svg_0 from 'public/assets/FoodReview/0.svg';
 
+const init_food = [
+  {
+    name: INITIAL_FOOD.FOOD1,
+  },
+  { name: INITIAL_FOOD.FOOD2 },
+  { name: INITIAL_FOOD.FOOD3 },
+];
+
 const Review: NextPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
@@ -18,9 +26,9 @@ const Review: NextPage = () => {
   useEffect(() => {
     // 서버에서 리뷰 등록할 음식 가져오기
     const map = new Map();
-    map.set(INITIAL_FOOD.FOOD1, {});
-    map.set(INITIAL_FOOD.FOOD2, {});
-    map.set(INITIAL_FOOD.FOOD3, {});
+    init_food.forEach((food) => {
+      map.set(food.name, {});
+    });
     setReviews(map);
     setIsLoading(false);
   }, []);

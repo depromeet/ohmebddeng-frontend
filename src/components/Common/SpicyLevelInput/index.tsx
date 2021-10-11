@@ -3,12 +3,13 @@ import React from 'react';
 import { LEVEL } from '@/types';
 import { SpicyLevelIcon } from '..';
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+interface SpicyLevelInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   name: LEVEL;
   checked: boolean;
 }
 
-const SpicyLevelInput = (props: Props) => {
+const SpicyLevelInput = (props: SpicyLevelInputProps) => {
   const { name, type, checked, ...rest } = props;
 
   return (

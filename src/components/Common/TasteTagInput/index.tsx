@@ -1,11 +1,13 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { TASTE } from '@/types';
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+
+export interface TasteTagInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   name: TASTE;
 }
 
-const TasteTagInput = (props: Props) => {
+const TasteTagInput = (props: TasteTagInputProps) => {
   const { name, type, checked, ...rest } = props;
   return (
     <Container checked={checked}>

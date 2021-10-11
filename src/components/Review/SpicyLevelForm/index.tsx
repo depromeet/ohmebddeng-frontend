@@ -3,12 +3,12 @@ import React from 'react';
 import { SpicyLevelInput } from '@/components/Common';
 import { LEVEL } from '@/types';
 
-interface Props {
+export interface SpicyLevelFormProps {
   level?: LEVEL;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SpicyLevelForm = ({ level, ...props }: Props) => {
+const SpicyLevelForm = ({ level, ...props }: SpicyLevelFormProps) => {
   return (
     <Form id="spicyLevelForm">
       {Object.values(LEVEL).map((name) => (

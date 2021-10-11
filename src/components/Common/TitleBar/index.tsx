@@ -4,13 +4,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import arrow_back from 'public/assets/common/arrow_back.svg';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface TitleBarProps extends HTMLAttributes<HTMLDivElement> {
   backButton: boolean;
   backLocation?: string;
   children?: React.ReactNode;
 }
 
-export default function TitleBar({ children, ...props }: Props) {
+export default function TitleBar({ children, ...props }: TitleBarProps) {
   const { backButton, backLocation = '/' } = props;
   const router = useRouter();
   const moveLocation = () => router.push(backLocation);
@@ -25,7 +25,7 @@ export default function TitleBar({ children, ...props }: Props) {
   );
 }
 
-const Container = styled.div<Props>`
+const Container = styled.div<TitleBarProps>`
   height: 56px;
   padding: 17px 0 15px;
   position: relative;
