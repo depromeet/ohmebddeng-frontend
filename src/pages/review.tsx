@@ -85,10 +85,10 @@ const Review: NextPage = () => {
             const data = reviews.get(foodName);
             return (
               <ReviewSection key={foodName}>
-                <ReviewTitle>
+                <div>
                   <Image src={svg_0} alt="thumnail" />
-                  <H2>{foodName}</H2>
-                </ReviewTitle>
+                  <h2>{foodName}</h2>
+                </div>
                 <SpicyLevelForm
                   level={data?.level}
                   onChange={handleCheckLevel(foodName)}
@@ -136,15 +136,15 @@ const ReviewSection = styled.section`
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 24px 16px;
-`;
 
-const ReviewTitle = styled.div`
-  display: flex;
-  align-items: center;
-`;
+  & div {
+    display: flex;
+    align-items: center;
 
-const H2 = styled.h2`
-  margin-left: 8px;
+    & h2 {
+      margin-left: 8px;
+    }
+  }
 `;
 
 export default Review;
