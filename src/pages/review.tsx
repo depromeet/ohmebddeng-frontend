@@ -27,7 +27,7 @@ const Review: NextPage = () => {
 
   useEffect(() => {
     for (const [_, { level, taste }] of Array.from(reviews.entries())) {
-      if (!level || !taste || taste.size === 0) {
+      if (!level || !taste || !taste.size) {
         setIsAllChecked(false);
         return;
       }
