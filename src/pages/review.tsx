@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import TitleBar from '@/components/Common/TitleBar';
 import Button from '@/components/Input/Button';
 import { SpicyLevelForm, TasteForm } from '@/components/Review';
+import { ROUTES } from '@/constants';
 import { INITIAL_FOOD, LEVEL, TASTE, ReviewState } from '@/types';
 import svg_0 from 'public/assets/FoodReview/0.svg';
 
@@ -46,7 +47,7 @@ const Review: NextPage = () => {
       alert('선택을 완료해주세요');
       return;
     }
-    router.push('/testResult');
+    router.push(ROUTES.TEST_RESULT);
   };
 
   const handleCheckLevel =
@@ -74,7 +75,7 @@ const Review: NextPage = () => {
 
   return (
     <Container>
-      <TitleBar backButton={true} backLocation="/">
+      <TitleBar backButton={true} backLocation={ROUTES.HOME}>
         당신의 매운 느낌을 표현해주세요
       </TitleBar>
       <div>
