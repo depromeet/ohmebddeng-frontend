@@ -11,7 +11,6 @@ interface SpicyLevelInputProps
 
 const SpicyLevelInput = (props: SpicyLevelInputProps) => {
   const { name, type, checked, ...rest } = props;
-
   return (
     <Label>
       <input type={type ?? 'radio'} value={name} checked={checked} {...rest} />
@@ -36,7 +35,7 @@ const Label = styled.label`
     margin-top: 12px;
   }
   & div.disabled {
-    color: #8e8e93;
+    color: ${({ theme }) => theme.colors.grey10};
   }
 `;
 

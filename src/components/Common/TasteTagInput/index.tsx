@@ -20,8 +20,10 @@ const TasteTagInput = (props: TasteTagInputProps) => {
 const Container = styled.label<{ checked?: boolean }>`
   display: inline-block;
   border-radius: 24px;
-  background-color: ${({ checked }) => (checked ? '#FF5252' : '#3A3A3C')};
-  color: ${({ checked }) => (checked ? '#F5F5F5' : '#8E8E93')};
+  background-color: ${({ checked, theme }) =>
+    checked ? theme.colors.red : theme.colors.grey40};
+  color: ${({ checked, theme }) =>
+    checked ? theme.colors.grey0 : theme.colors.grey10};
   padding: 12px 18px 11px;
   text-align: center;
   cursor: pointer;
