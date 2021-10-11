@@ -1,11 +1,13 @@
 import styled from '@emotion/styled';
 import type { NextPage } from 'next';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import TitleBar from '@/components/Common/TitleBar';
 import Button from '@/components/Input/Button';
-import FoodReview from '@/components/Review/FoodReview';
+import { SpicyLevelForm, TasteForm } from '@/components/Review';
 import { INITIAL_FOOD, LEVEL, TASTE, ReviewState } from '@/types';
+import svg_0 from 'public/assets/FoodReview/0.svg';
 
 const Review: NextPage = () => {
   const router = useRouter();
@@ -74,14 +76,20 @@ const Review: NextPage = () => {
           Object.keys(Object.fromEntries(reviews)).map((foodName) => {
             const data = reviews.get(foodName);
             return (
-              <FoodReview
-                name={foodName}
-                key={foodName}
-                level={data?.level}
-                taste={data?.taste}
-                onChangeLevel={handleCheckLevel(foodName)}
-                onChangeTaste={handleCheckTaste(foodName)}
-              />
+              <ReviewSection key={foodName}>
+                <ReviewTitle>
+                  <Image src={svg_0} alt="thumnail" />
+                  <H2>{foodName}</H2>
+                </ReviewTitle>
+                <SpicyLevelForm
+                  level={data?.level}
+                  onChange={handleCheckLevel(foodName)}
+                />
+                <TasteForm
+                  taste={data?.taste}
+                  onChange={handleCheckTaste(foodName)}
+                />
+              </ReviewSection>
             );
           })}
       </Content>
@@ -103,11 +111,32 @@ const Container = styled.div`
   margin: 0 16px 0 17px;
   height: 100%;
 `;
+
 const Content = styled.div`
   margin: 16px 0 80px;
   display: flex;
   flex-direction: column;
   gap: 20px 0;
+`;
+
+const ReviewSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 315px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px 16px;
+`;
+
+const ReviewTitle = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const H2 = styled.h2`
+  margin-left: 8px;
 `;
 
 export default Review;
