@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { HTMLAttributes } from 'markdown-to-jsx/node_modules/@types/react';
 import Image from 'next/image';

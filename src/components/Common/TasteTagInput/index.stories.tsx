@@ -1,5 +1,5 @@
-import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React from 'react';
 import { TASTE } from '@/types';
 import TasteTagInput from '.';
 

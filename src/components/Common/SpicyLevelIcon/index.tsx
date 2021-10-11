@@ -1,13 +1,13 @@
-import React from 'react';
 import Image from 'next/image';
+import React from 'react';
 import { LEVEL } from '@/types';
 import svg_0 from 'public/assets/SpciyLevelInput/0.svg';
-import svg_1 from 'public/assets/SpciyLevelInput/1.svg';
-import svg_2 from 'public/assets/SpciyLevelInput/2.svg';
-import svg_3 from 'public/assets/SpciyLevelInput/3.svg';
 import svg_0_disabled from 'public/assets/SpciyLevelInput/0_disabled.svg';
+import svg_1 from 'public/assets/SpciyLevelInput/1.svg';
 import svg_1_disabled from 'public/assets/SpciyLevelInput/1_disabled.svg';
+import svg_2 from 'public/assets/SpciyLevelInput/2.svg';
 import svg_2_disabled from 'public/assets/SpciyLevelInput/2_disabled.svg';
+import svg_3 from 'public/assets/SpciyLevelInput/3.svg';
 import svg_3_disabled from 'public/assets/SpciyLevelInput/3_disabled.svg';
 
 interface Props {
