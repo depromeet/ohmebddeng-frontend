@@ -19,18 +19,14 @@ interface SpicyLevelIconProps {
 const SpicyLevelIcon = (props: SpicyLevelIconProps) => {
   const { level, checked } = props;
 
-  switch (level) {
-    case '냠냠':
-      return <Image src={checked ? svg_0 : svg_0_disabled} alt={level} />;
-    case '쓰읍':
-      return <Image src={checked ? svg_1 : svg_1_disabled} alt={level} />;
-    case '씁하':
-      return <Image src={checked ? svg_2 : svg_2_disabled} alt={level} />;
-    case '헥헥':
-      return <Image src={checked ? svg_3 : svg_3_disabled} alt={level} />;
-    default:
-      return <div></div>;
-  }
+  const IconByLevel = {
+    냠냠: <Image src={checked ? svg_0 : svg_0_disabled} alt={level} />,
+    쓰읍: <Image src={checked ? svg_1 : svg_1_disabled} alt={level} />,
+    씁하: <Image src={checked ? svg_2 : svg_2_disabled} alt={level} />,
+    헥헥: <Image src={checked ? svg_3 : svg_3_disabled} alt={level} />,
+  };
+
+  return IconByLevel[level] ?? <div></div>;
 };
 
 export default SpicyLevelIcon;
