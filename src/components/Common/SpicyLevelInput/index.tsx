@@ -8,9 +8,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   checked: boolean;
 }
 
-const SpicyLevelInput = (props: Props) => {
-  const { name, type, checked, ...rest } = props;
-
+const SpicyLevelInput = ({ name, type, checked, ...rest }: Props) => {
   return (
     <Label>
       <input type={type ?? 'radio'} value={name} checked={checked} {...rest} />
@@ -28,11 +26,11 @@ const Label = styled.label`
     height: 0;
   }
   & div {
-    display: block !important;
+    display: block;
     cursor: pointer;
   }
   & div.name {
-    margin-top: 12px;
+    margin-top: 7px;
   }
   & div.disabled {
     color: #8e8e93;

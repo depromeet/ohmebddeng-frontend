@@ -16,9 +16,7 @@ interface Props {
 }
 
 // 아이콘
-const SpicyLevelIcon = (props: Props) => {
-  const { level, checked } = props;
-
+const SpicyLevelIcon = ({ level, checked }: Props) => {
   switch (level) {
     case '냠냠':
       return <Image src={checked ? svg_0 : svg_0_disabled} alt={level} />;

@@ -5,8 +5,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   name: TASTE;
 }
 
-const TasteTagInput = (props: Props) => {
-  const { name, type, checked, ...rest } = props;
+const TasteTagInput = ({ name, type, checked, ...rest }: Props) => {
   return (
     <Container checked={checked}>
       <Input type={type ?? 'checkbox'} name={name} value={name} {...rest} />#{' '}

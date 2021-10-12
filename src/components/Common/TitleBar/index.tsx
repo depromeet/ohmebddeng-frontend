@@ -10,22 +10,25 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-export default function TitleBar({ children, ...props }: Props) {
-  const { backButton, backLocation = '/' } = props;
+export default function TitleBar({
+  children,
+  backButton,
+  backLocation = '/',
+}: Props) {
   const router = useRouter();
   const moveLocation = () => router.push(backLocation);
 
   return (
-    <Container {...props}>
+    <Container>
       {backButton && (
-        <Image onClick={moveLocation} src={arrow_back} alt={arrow_back} />
+        <Image onClick={moveLocation} src={arrow_back} alt="뒤로" />
       )}
       <h1>{children}</h1>
     </Container>
   );
 }
 
-const Container = styled.div<Props>`
+const Container = styled.div`
   height: 56px;
   padding: 17px 0 15px;
   position: relative;
