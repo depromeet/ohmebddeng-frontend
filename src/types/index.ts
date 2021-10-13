@@ -24,3 +24,9 @@ export interface ReviewState {
   level?: LEVEL;
   taste?: Set<TASTE>;
 }
+
+export interface Food {
+  id: string;
+  name: string;
+  image_url: string;
+}
