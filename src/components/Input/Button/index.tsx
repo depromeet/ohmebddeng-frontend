@@ -5,7 +5,7 @@ import { HTMLAttributes } from 'markdown-to-jsx/node_modules/@types/react';
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   buttonType: 'contained' | 'outline';
   color: 'green' | 'red' | 'grey';
-  rounded?: boolean;
+  rounded: boolean;
   fullWidth?: boolean;
   children?: React.ReactNode;
 }
@@ -46,7 +46,7 @@ const StyledButton = styled.button<ButtonProps>`
         background-color: ${getColor(color, theme)};
       }
     `}
-    ${({ rounded = false }) =>
+  ${({ rounded = false }) =>
     rounded &&
     css`
       border-radius: 100px;

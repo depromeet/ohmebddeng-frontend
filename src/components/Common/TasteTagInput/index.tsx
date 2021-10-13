@@ -1,17 +1,40 @@
+import styled from '@emotion/styled';
 import React from 'react';
 import { TASTE } from '@/types';
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+
+export interface TasteTagInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   name: TASTE;
 }
 
-const TasteTagInput = (props: Props) => {
-  const { name, type, ...rest } = props;
+const TasteTagInput = ({
+  name,
+  type,
+  checked,
+  ...rest
+}: TasteTagInputProps) => {
   return (
-    <div>
-      <input type={type ?? 'checkbox'} name={name} value={name} {...rest} />
-      <label htmlFor={name}>#{name}</label>
-    </div>
+    <Container checked={checked}>
+      <Input type={type ?? 'checkbox'} name={name} value={name} {...rest} />#{' '}
+      {name}
+    </Container>
   );
 };
+
+const Container = styled.label<{ checked?: boolean }>`
+  display: inline-block;
+  border-radius: 24px;
+  background-color: ${({ checked, theme }) =>
+    checked ? theme.colors.red : theme.colors.grey40};
+  color: ${({ checked, theme }) =>
+    checked ? theme.colors.grey0 : theme.colors.grey10};
+  padding: 12px 18px 11px;
+  text-align: center;
+  cursor: pointer;
+`;
+
+const Input = styled.input`
+  display: none;
+`;
 
 export default TasteTagInput;

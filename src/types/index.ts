@@ -6,14 +6,21 @@ export enum LEVEL {
 }
 
 export enum TASTE {
-  얼큰해요 = '얼큰해요',
-  매콤해요 = '매콤해요',
-  끝맛이매워요 = '끝맛이매워요',
-  매워요 = '매워요',
-  달달해요 = '달달해요',
+  매콤달콤한 = '매콤달콤한',
+  개운한 = '개운한',
+  칼칼한 = '칼칼한',
+  얼큰한 = '얼큰한',
+  얼얼한 = '얼얼한',
+  알싸한 = '알싸한',
 }
 
-export interface ReviewValue {
-  levelValue: string;
-  tasteValue: string[];
+export enum INITIAL_FOOD {
+  FOOD1 = '진라면 매운맛',
+  FOOD2 = '불닭 볶음면',
+  FOOD3 = '신라면',
+}
+
+export interface ReviewState {
+  level?: LEVEL;
+  taste?: Set<TASTE>;
 }
