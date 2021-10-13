@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { HTMLAttributes } from 'markdown-to-jsx/node_modules/@types/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { ROUTES } from '@/constants';
 import arrow_back from 'public/assets/common/arrow_back.svg';
 
 export interface TitleBarProps extends HTMLAttributes<HTMLDivElement> {
@@ -10,22 +11,25 @@ export interface TitleBarProps extends HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-export default function TitleBar({ children, ...props }: TitleBarProps) {
-  const { backButton, backLocation = '/' } = props;
+const TitleBar = ({
+  children,
+  backButton,
+  backLocation = ROUTES.HOME,
+}: TitleBarProps) => {
   const router = useRouter();
   const moveLocation = () => router.push(backLocation);
 
   return (
-    <Container {...props}>
+    <Container>
       {backButton && (
-        <Image onClick={moveLocation} src={arrow_back} alt={arrow_back} />
+        <Image onClick={moveLocation} src={arrow_back} alt="뒤로" />
       )}
       <h1>{children}</h1>
     </Container>
   );
-}
+};
 
-const Container = styled.div<TitleBarProps>`
+const Container = styled.div`
   height: 56px;
   padding: 17px 0 15px;
   position: relative;
@@ -43,3 +47,5 @@ const Container = styled.div<TitleBarProps>`
     line-height: 140%;
   }
 `;
+
+export default TitleBar;

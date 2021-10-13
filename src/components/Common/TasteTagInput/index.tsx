@@ -7,8 +7,12 @@ export interface TasteTagInputProps
   name: TASTE;
 }
 
-const TasteTagInput = (props: TasteTagInputProps) => {
-  const { name, type, checked, ...rest } = props;
+const TasteTagInput = ({
+  name,
+  type,
+  checked,
+  ...rest
+}: TasteTagInputProps) => {
   return (
     <Container checked={checked}>
       <Input type={type ?? 'checkbox'} name={name} value={name} {...rest} />#{' '}
