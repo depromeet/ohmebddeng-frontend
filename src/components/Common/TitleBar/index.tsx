@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import { HTMLAttributes } from 'markdown-to-jsx/node_modules/@types/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { HTMLAttributes } from 'react';
 import { ROUTES } from '@/constants';
 import arrow_back from 'public/assets/common/arrow_back.svg';
 
