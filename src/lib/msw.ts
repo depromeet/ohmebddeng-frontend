@@ -1,6 +1,8 @@
+import { isServer } from '@/constants/environment';
+
 export const initMSW = () => {
   if (process.env.NODE_ENV === 'development') {
-    if (typeof window !== 'undefined') {
+    if (!isServer) {
       const { worker } = require('../mocks/browser');
       worker.start();
     }
