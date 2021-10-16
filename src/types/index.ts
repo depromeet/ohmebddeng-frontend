@@ -3,6 +3,7 @@ export enum LEVEL {
   쓰읍 = '쓰읍',
   씁하 = '씁하',
   헥헥 = '헥헥',
+  모름 = '모름',
 }
 
 export enum TASTE {
