@@ -32,6 +32,21 @@ export default function LevelTestPage() {
             <TitleBar backButton={false}>
               맵레벨 테스트 ({step}/{data.data.foodList.length})
             </TitleBar>
+            <div
+              css={css`
+                width: 100%;
+                height: 2px;
+                background-color: ${theme.colors.grey10};
+              `}
+            >
+              <div
+                css={css`
+                  width: ${(100 / data.data.foodList.length) * step}%;
+                  height: 100%;
+                  background-color: ${theme.colors.red};
+                `}
+              />
+            </div>
 
             <div
               css={css`
