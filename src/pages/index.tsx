@@ -15,7 +15,7 @@ const Home: NextPage = () => {
   const theme = useTheme();
 
   const handleClickGoTest = useCallback(() => {
-    router.push(ROUTES.LEVEL_TEST);
+    router.push(`${ROUTES.LEVEL_TEST}/1`);
   }, [router]);
 
   return (

@@ -6,7 +6,18 @@ export const getLevelTestFoodsQuery = () => {
     return res(
       ctx.json({
         data: {
-          foodList: [],
+          foodList: [
+            {
+              id: 1,
+              name: '진라면 순한맛',
+              image_url: '/assets/FoodReview/0.svg',
+            },
+            {
+              id: 2,
+              name: '진라면 매운맛',
+              image_url: '/assets/FoodReview/0.svg',
+            },
+          ],
         },
         statusCode: 200,
         message: 'Success',
