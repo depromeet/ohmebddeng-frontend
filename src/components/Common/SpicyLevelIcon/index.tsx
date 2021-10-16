@@ -9,6 +9,8 @@ import svg_2 from 'public/assets/SpciyLevelInput/2.svg';
 import svg_2_disabled from 'public/assets/SpciyLevelInput/2_disabled.svg';
 import svg_3 from 'public/assets/SpciyLevelInput/3.svg';
 import svg_3_disabled from 'public/assets/SpciyLevelInput/3_disabled.svg';
+import svg_4 from 'public/assets/SpciyLevelInput/4.svg';
+import svg_4_disabled from 'public/assets/SpciyLevelInput/4_disabled.svg';
 
 interface SpicyLevelIconProps {
   level: LEVEL;
@@ -22,6 +24,7 @@ const SpicyLevelIcon = ({ level, checked }: SpicyLevelIconProps) => {
     쓰읍: <Image src={checked ? svg_1 : svg_1_disabled} alt={level} />,
     씁하: <Image src={checked ? svg_2 : svg_2_disabled} alt={level} />,
     헥헥: <Image src={checked ? svg_3 : svg_3_disabled} alt={level} />,
+    모름: <Image src={checked ? svg_4 : svg_4_disabled} alt={level} />,
   };
 
   return IconByLevel[level] ?? <div></div>;
