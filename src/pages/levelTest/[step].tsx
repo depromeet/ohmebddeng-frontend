@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import { getLevelTestFoodsQuery, LevelTestFoods } from '@/api/levelTest';
 import TitleBar from '@/components/Common/TitleBar';
 import { SpicyLevelForm } from '@/components/Review';
+import { ROUTES } from '@/constants';
 import { LEVEL } from '@/types';
 
 export default function LevelTestPage() {
@@ -20,8 +21,14 @@ export default function LevelTestPage() {
   const handleChangeLevel = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setLevel(e.target.value as LEVEL);
+      if (data && step < data?.data.foodList.length) {
+        setTimeout(() => {
+          router.push(`${ROUTES.LEVEL_TEST}/${step + 1}`);
+          setLevel(undefined);
+        }, 500);
+      }
     },
-    []
+    [data, router, step]
   );
 
   return (

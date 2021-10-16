@@ -17,6 +17,21 @@ export const getLevelTestFoodsQuery = () => {
               name: '진라면 매운맛',
               image_url: '/assets/FoodReview/0.svg',
             },
+            {
+              id: 3,
+              name: '진라면 매운맛 3',
+              image_url: '/assets/FoodReview/0.svg',
+            },
+            {
+              id: 4,
+              name: '진라면 매운맛 4',
+              image_url: '/assets/FoodReview/0.svg',
+            },
+            {
+              id: 5,
+              name: '진라면 매운맛 5',
+              image_url: '/assets/FoodReview/0.svg',
+            },
           ],
         },
         statusCode: 200,
