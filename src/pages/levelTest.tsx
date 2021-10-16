@@ -1,27 +1,33 @@
-import { css, useTheme } from '@emotion/react';
+import React, {
+  ChangeEvent,
+  SyntheticEvent,
+  useCallback,
+  useState,
+} from 'react';
 import { useQuery } from 'react-query';
 import { getLevelTestFoodsQuery, LevelTestFoods } from '@/api/levelTest';
+import TitleBar from '@/components/Common/TitleBar';
+import { SpicyLevelForm } from '@/components/Review';
+import { LEVEL } from '@/types';
 
 export default function LevelTestPage() {
-  const theme = useTheme();
+  const [level, setLevel] = useState<LEVEL | undefined>(undefined);
   const { data } = useQuery<LevelTestFoods>(['levelTestFoods', size], () =>
     getLevelTestFoodsQuery(size)
   );
 
-  console.log(data);
+  const handleChangeLevel = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setLevel(e.target.value as LEVEL);
+    },
+    []
+  );
 
   return (
     <div>
-      <header
-        css={css`
-          font-size: 17px;
-          line-height: 140%;
-          text-align: center;
-          color: ${theme.colors.white};
-        `}
-      >
-        당신의 맵레벨을 알아보세요
-      </header>
+      <TitleBar backButton={false}>당신의 매운 느낌을 표현해주세요</TitleBar>
+
+      <SpicyLevelForm level={level} onChange={handleChangeLevel} />
     </div>
   );
 }
