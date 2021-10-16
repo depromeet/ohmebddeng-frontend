@@ -1,6 +1,6 @@
 import { css, Theme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { HTMLAttributes } from 'markdown-to-jsx/node_modules/@types/react';
+import { HTMLAttributes } from 'react';
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   buttonType: 'contained' | 'outline';
