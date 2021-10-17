@@ -129,9 +129,9 @@ const Container = styled.div`
 const ReviewSection = styled.section`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 25px 0;
   width: 100%;
-  height: 315px;
+  min-height: 315px;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 24px 16px;
