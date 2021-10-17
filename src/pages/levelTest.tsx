@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getLevelTestFoodsQuery, LevelTestFoods } from '@/api/levelTest';
+import { AnonymousUser, getAnonymousUserQuery } from '@/api/user';
 import TitleBar from '@/components/Common/TitleBar';
 import { SpicyLevelForm } from '@/components/Review';
 import { LEVEL } from '@/types';
@@ -13,30 +14,48 @@ export default function LevelTestPage() {
   const index = useMemo(() => step - 1, [step]);
   const [level, setLevel] = useState<LEVEL | undefined>(undefined);
   const [result, setResult] = useState<{ [foodId: string]: LEVEL }>({});
-  const { data } = useQuery<LevelTestFoods>(['levelTestFoods', size], () =>
-    getLevelTestFoodsQuery(size)
+  const [testIsDone, setTestIsDone] = useState(false);
+  const { data: foods } = useQuery<LevelTestFoods>(
+    ['levelTestFoods', size],
+    () => getLevelTestFoodsQuery(size)
   );
 
   const goToNextStep = useCallback(
     (foodId: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const timeToDelay = 0.5 * 1000;
       const selectedLevel = e.target.value as LEVEL;
       setLevel(selectedLevel);
       setResult({ ...result, [foodId]: selectedLevel });
-      setTimeout(() => {
-        setLevel(undefined);
-        setStep((step) => step + 1);
-      }, 500);
+
+      if (foods && step < foods?.data.foodList.length) {
+        setTimeout(() => {
+          setLevel(undefined);
+          setStep((step) => step + 1);
+        }, timeToDelay);
+
+        return;
+      }
+
+      setTestIsDone(true);
     },
-    [result]
+    [result, foods, step]
   );
+
+  const { data: user } = useQuery<AnonymousUser>(
+    ['anonymousUser'],
+    getAnonymousUserQuery,
+    { enabled: testIsDone }
+  );
+
+  console.log(user);
 
   return (
     <div>
       {
-        data?.data.foodList.map((food) => (
+        foods?.data.foodList.map((food) => (
           <div key={food.id}>
             <TitleBar backButton={false}>
-              맵레벨 테스트 ({step}/{data.data.foodList.length})
+              맵레벨 테스트 ({step}/{foods.data.foodList.length})
             </TitleBar>
             <div
               css={css`
@@ -48,7 +67,7 @@ export default function LevelTestPage() {
             >
               <div
                 css={css`
-                  width: ${(100 / data.data.foodList.length) * step}%;
+                  width: ${(100 / foods.data.foodList.length) * step}%;
                   height: 100%;
                   background-color: ${theme.colors.red};
                 `}
