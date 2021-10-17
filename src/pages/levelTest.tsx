@@ -1,4 +1,5 @@
 import { css, useTheme } from '@emotion/react';
+import Image from 'next/image';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getLevelTestFoodsQuery, LevelTestFoods } from '@/api/levelTest';
@@ -43,17 +44,40 @@ export default function LevelTestPage() {
                 height: 2px;
                 background-color: ${theme.colors.grey10};
               `}
+              role="progressbar"
             >
               <div
                 css={css`
-                  width: ${(100 / data.data.foodList.length) * step}%;
+                  width: ${(100 / data.data.foodList.length) * index}%;
                   height: 100%;
                   background-color: ${theme.colors.red};
                 `}
               />
             </div>
+            <section
+              css={css`
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 62px 54px;
+              `}
+            >
+              <Image
+                src={food.image_url}
+                alt={food.name}
+                width={124}
+                height={170}
+              />
+              <h2
+                css={css`
+                  padding-top: 18px;
+                `}
+              >
+                {food.name}
+              </h2>
+            </section>
 
-            <div
+            <section
               css={css`
                 background-color: rgba(255, 255, 255, 0.1);
                 border-radius: 14px;
@@ -75,7 +99,7 @@ export default function LevelTestPage() {
                 onChange={goToNextStep(food.id)}
                 disabled={!!level}
               />
-            </div>
+            </section>
           </div>
         ))[index]
       }
