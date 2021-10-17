@@ -48,12 +48,13 @@ export default function LevelTestPage() {
             >
               <div
                 css={css`
-                  width: ${(100 / data.data.foodList.length) * index}%;
+                  width: ${(100 / data.data.foodList.length) * step}%;
                   height: 100%;
                   background-color: ${theme.colors.red};
                 `}
               />
             </div>
+
             <section
               css={css`
                 display: flex;
@@ -68,20 +69,26 @@ export default function LevelTestPage() {
                 width={124}
                 height={170}
               />
-              <h2
+              <p
                 css={css`
+                  font-family: SBAggroB;
+                  font-weight: normal;
                   padding-top: 18px;
+                  font-size: 32px;
+                  line-height: 140%;
+                  color: ${theme.colors.grey0};
                 `}
               >
                 {food.name}
-              </h2>
+              </p>
             </section>
 
             <section
               css={css`
+                margin: 0 16px;
+                padding: 24px 26px;
                 background-color: rgba(255, 255, 255, 0.1);
                 border-radius: 14px;
-                padding: 24px 26px;
               `}
             >
               <h3
