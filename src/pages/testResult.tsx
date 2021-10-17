@@ -1,29 +1,60 @@
 import styled from '@emotion/styled';
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import Loading from '@/components/Common/Loading';
 import Button from '@/components/Input/Button';
+import { ROUTES } from '@/constants';
 import { initMSW } from '@/lib/msw';
 
 initMSW();
 
 const TestResult: NextPage = () => {
   const [isResult, setIsResult] = useState<boolean>(false);
+  const router = useRouter();
 
-  const reTest = () => {};
-  const shareResult = () => {};
+  const goHome = () => {
+    router.push(ROUTES.HOME);
+  };
+
+  const shareMyResult = async () => {
+    if (navigator.share) {
+      const title = document.title;
+      const url = document.location.href;
+
+      navigator
+        .share({
+          title,
+          url,
+        })
+        .then(() => {
+          console.log('Thanks for sharing!');
+        })
+        .catch(console.error);
+    } else {
+      // fallback
+      // 직접 폴백 다이얼로그를 만들어서 띄우는 로직 or 다른 브라우저를 사용하라는 메세지
+      console.log('fallback');
+    }
+    const sharePromise = await window.navigator.share({
+      title: document.title,
+      text: 'test text',
+      url: 'http://localhost:3000/testResult',
+    });
+    console.log(sharePromise);
+  };
 
   useEffect(() => {
     setTimeout(() => {
       setIsResult(true);
-    }, 3000);
+    }, 100);
   }, []);
 
   return (
     <Container>
       {isResult ? (
         <TestResultWrapper>
-          <h1>당신의 레벨은?</h1>
+          <h1>당신의 레벨은????</h1>
           <div className="test-result__image-box">
             <img src="/images/lv1.png" alt="level_1" />
           </div>
@@ -34,16 +65,16 @@ const TestResult: NextPage = () => {
               color="red"
               rounded
               fullWidth
-              onClick={reTest}
+              onClick={goHome}
             >
-              다시 테스트하기
+              홈으로
             </Button>
             <Button
               fullWidth
               buttonType="outline"
               color="red"
               rounded
-              onClick={shareResult}
+              onClick={shareMyResult}
             >
               맵순위 공유하기
             </Button>
@@ -100,12 +131,6 @@ type ResultText = {
   level: number;
 };
 
-type InfoType = {
-  img: string;
-  title: string;
-  content: string;
-};
-
 const ResultText = ({ level }: ResultText) => {
   const info: InfoType = levelInfo[level];
   return (
@@ -133,6 +158,12 @@ const ResultTextWrapper = styled.div`
     white-space: pre-wrap;
   }
 `;
+
+type InfoType = {
+  img: string;
+  title: string;
+  content: string;
+};
 
 const levelInfo: { [key: number]: InfoType } = {
   1: {
