@@ -6,6 +6,7 @@ import { LEVEL } from '@/types';
 export interface SpicyLevelFormProps {
   level?: LEVEL;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
 }
 
 const SpicyLevelForm = ({ level, ...props }: SpicyLevelFormProps) => {

@@ -1,34 +1,32 @@
 import { css, useTheme } from '@emotion/react';
-import { useRouter } from 'next/router';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getLevelTestFoodsQuery, LevelTestFoods } from '@/api/levelTest';
 import TitleBar from '@/components/Common/TitleBar';
 import { SpicyLevelForm } from '@/components/Review';
-import { ROUTES } from '@/constants';
 import { LEVEL } from '@/types';
 
 export default function LevelTestPage() {
-  const router = useRouter();
-  const step = parseInt(router.query.step as string);
-  const index = step - 1;
   const theme = useTheme();
+  const [step, setStep] = useState(1);
+  const index = useMemo(() => step - 1, [step]);
   const [level, setLevel] = useState<LEVEL | undefined>(undefined);
+  const [result, setResult] = useState<{ [foodId: string]: LEVEL }>({});
   const { data } = useQuery<LevelTestFoods>(['levelTestFoods', size], () =>
     getLevelTestFoodsQuery(size)
   );
 
-  const handleChangeLevel = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setLevel(e.target.value as LEVEL);
-      if (data && step < data?.data.foodList.length) {
-        setTimeout(() => {
-          router.push(`${ROUTES.LEVEL_TEST}/${step + 1}`);
-          setLevel(undefined);
-        }, 500);
-      }
+  const goToNextStep = useCallback(
+    (foodId: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const selectedLevel = e.target.value as LEVEL;
+      setLevel(selectedLevel);
+      setResult({ ...result, [foodId]: selectedLevel });
+      setTimeout(() => {
+        setLevel(undefined);
+        setStep((step) => step + 1);
+      }, 500);
     },
-    [data, router, step]
+    [result]
   );
 
   return (
@@ -72,7 +70,11 @@ export default function LevelTestPage() {
               >
                 얼마나 맵게 느껴지나요?
               </h3>
-              <SpicyLevelForm level={level} onChange={handleChangeLevel} />
+              <SpicyLevelForm
+                level={level}
+                onChange={goToNextStep(food.id)}
+                disabled={!!level}
+              />
             </div>
           </div>
         ))[index]
