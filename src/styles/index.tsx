@@ -53,7 +53,6 @@ export const GlobalStyle = () => {
           font-size: 13px;
           line-height: 140%;
           letter-spacing: 1.66667px;
-          background: black;
           color: white;
         }
         a:not([class]) {
