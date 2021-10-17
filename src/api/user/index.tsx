@@ -13,17 +13,18 @@ export interface AnonymousUser {
 }
 
 export const getAnonymousUserQuery = async () => {
-  const { data } = await apiClient.get<AnonymousUser>(`/user/anonymous`);
-
   try {
+    const { data } = await apiClient.get<AnonymousUser>(`/user/anonymous`);
+
     localStorage.setItem(anonymousUserIdKey, data.data.anonymousId);
     localStorage.setItem(userIdKey, data.data.userId);
+
+    return data;
   } catch (error) {
     // TODO: anonymous user id 저장 실패에 대한 피드백을 유저에게 전달해야한다.
     console.log(error);
+    throw error;
   }
-
-  return data;
 };
 
 export interface User {
