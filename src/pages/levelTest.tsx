@@ -1,15 +1,22 @@
 import { css, useTheme } from '@emotion/react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import React, { useCallback, useMemo, useState } from 'react';
-import { useQuery } from 'react-query';
-import { getLevelTestFoodsQuery, LevelTestFoods } from '@/api/levelTest';
+import { useMutation, useQuery } from 'react-query';
+import {
+  getLevelTestFoodsQuery,
+  LevelTestFoods,
+  postLevelTestQuery,
+} from '@/api/levelTest';
 import { AnonymousUser, getAnonymousUserQuery } from '@/api/user';
 import TitleBar from '@/components/Common/TitleBar';
 import { SpicyLevelForm } from '@/components/Review';
+import { ROUTES } from '@/constants';
 import { LEVEL } from '@/types';
 
 export default function LevelTestPage() {
   const theme = useTheme();
+  const router = useRouter();
   const [step, setStep] = useState(1);
   const index = useMemo(() => step - 1, [step]);
   const [level, setLevel] = useState<LEVEL | undefined>(undefined);
@@ -44,10 +51,12 @@ export default function LevelTestPage() {
   const { data: user } = useQuery<AnonymousUser>(
     ['anonymousUser'],
     getAnonymousUserQuery,
-    { enabled: testIsDone }
+    { enabled: testIsDone, onSuccess: () => mutation.mutate(result) }
   );
 
-  console.log(user);
+  const mutation = useMutation(postLevelTestQuery, {
+    onSuccess: () => router.push(ROUTES.REVIEW),
+  });
 
   return (
     <div>
