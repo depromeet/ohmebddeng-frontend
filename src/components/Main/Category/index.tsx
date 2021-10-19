@@ -9,45 +9,44 @@ export interface ItemProps {
 
 export interface CategoryProps extends ItemProps {
   title: string;
-  contants: {
+  contents: {
     textFirst: string;
     textSecond?: string;
-    image: any;
+    image: string;
     color: string;
   }[];
 }
 
-const Category = ({ title, contants, ...props }: CategoryProps) => {
+const Category = ({ title, contents, ...props }: CategoryProps) => {
   return (
-    <Container>
+    <div>
       <Title>{title}</Title>
       <Content>
-        {contants.map((contant) => (
-          <Item key={contant.textFirst} color={contant.color} {...props}>
+        {contents.map((content) => (
+          <Item key={content.textFirst} color={content.color} {...props}>
             <ItemContent>
               <Image
-                src={contant.image}
-                alt={`${contant.textFirst}${
-                  contant.textSecond ? ` ${contant.textSecond}` : ``
+                src={content.image}
+                alt={`${content.textFirst}${
+                  content.textSecond ? ` ${content.textSecond}` : ``
                 }`}
               />
               <br />
-              {contant.textFirst}
-              {contant.textSecond && (
+              {content.textFirst}
+              {content.textSecond && (
                 <>
                   <br />
-                  {contant.textSecond}
+                  {content.textSecond}
                 </>
               )}
             </ItemContent>
           </Item>
         ))}
       </Content>
-    </Container>
+    </div>
   );
 };
 
-const Container = styled.div``;
 const Title = styled.div`
   margin: 8.5px;
   text-align: left;
