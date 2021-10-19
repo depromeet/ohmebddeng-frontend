@@ -3,4 +3,5 @@ export const ROUTES = {
   LEVEL_TEST: '/levelTest',
   REVIEW: '/review',
   TEST_RESULT: '/testResult',
+  MAIN: '/main',
 };
