@@ -1,15 +1,22 @@
 import { css, useTheme } from '@emotion/react';
 import type { NextPage } from 'next';
 import Image from 'next/image';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useCallback } from 'react';
 import Button from '@/components/Input/Button';
+import { ROUTES } from '@/constants';
 import logo from '@public/images/logo.png';
 import ticketLevel5 from '@public/images/round-level-5.png';
 import squareLevel5 from '@public/images/square-level-5.png';
 import userLevel5 from '@public/images/user-level-5.png';
 
 const Home: NextPage = () => {
+  const router = useRouter();
   const theme = useTheme();
+
+  const handleClickGoTest = useCallback(() => {
+    router.push(ROUTES.LEVEL_TEST);
+  }, [router]);
 
   return (
     <div
@@ -94,6 +101,7 @@ const Home: NextPage = () => {
           css={css`
             width: 100%;
           `}
+          onClick={handleClickGoTest}
         >
           테스트 하러가기
         </Button>
