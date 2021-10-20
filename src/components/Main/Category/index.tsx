@@ -21,8 +21,12 @@ const Category = ({ title, contents, ...props }: CategoryProps) => {
     <div>
       <Title>{title}</Title>
       <Content>
-        {contents.map((content) => (
-          <Item key={content.textFirst} color={content.color} {...props}>
+        {contents.map((content, index) => (
+          <Item
+            key={`${content.textFirst}${index}`}
+            color={content.color}
+            {...props}
+          >
             <ItemContent>
               <Image
                 src={content.image}

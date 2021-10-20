@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import type { NextPage } from 'next';
-import { Category } from '@/components/Main';
+import { Category, ProfileCard } from '@/components/Main';
+import { USER_LEVEL } from '@/types';
 import svg_0 from 'public/assets/Main/0.svg';
 import svg_1 from 'public/assets/Main/1.svg';
 import svg_2 from 'public/assets/Main/2.svg';
@@ -52,6 +53,7 @@ const Random = {
 const Main: NextPage = () => {
   return (
     <Container>
+      <ProfileCard level={USER_LEVEL.맵러버} />
       <Category title={Recommend.title} contents={Recommend.contents} />
       <Category
         title={Random.title}
