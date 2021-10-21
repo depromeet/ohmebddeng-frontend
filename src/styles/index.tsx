@@ -5,7 +5,6 @@ export const GlobalStyle = () => {
     <Global
       styles={css`
         @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
-
         *,
         *::before,
         *::after {
@@ -70,6 +69,20 @@ export const GlobalStyle = () => {
         textarea,
         select {
           font: inherit;
+        }
+
+        .slick-dots li {
+          margin: 0 1.25px !important;
+        }
+
+        .slick-dots li button:before {
+          opacity: 1 !important;
+          color: #636366 !important;
+        }
+
+        .slick-dots li.slick-active button:before {
+          opacity: 1 !important;
+          color: #ff5252 !important;
         }
 
         @media (prefers-reduced-motion: reduce) {
