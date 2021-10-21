@@ -9,7 +9,7 @@ import {
   postLevelTestQuery,
 } from '@/api/levelTest';
 import { AnonymousUser, getAnonymousUserQuery } from '@/api/user';
-import TitleBar from '@/components/Common/TitleBar';
+import { TitleBar } from '@/components/Common';
 import { SpicyLevelForm } from '@/components/Review';
 import { ROUTES } from '@/constants';
 import { LEVEL } from '@/types';
