@@ -1,3 +1,9 @@
+export enum TASTE_LEVEL {
+  냠냠 = '냠냠',
+  쓰읍 = '쓰읍',
+  씁하 = '씁하',
+  헥헥 = '헥헥',
+}
 export enum LEVEL {
   냠냠 = '냠냠',
   쓰읍 = '쓰읍',
