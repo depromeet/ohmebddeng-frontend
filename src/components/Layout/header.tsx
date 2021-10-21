@@ -44,6 +44,12 @@ const CenterContainer = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  & span {
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 23.8px;
+  }
 `;
 
 const SideContainer = styled.header`

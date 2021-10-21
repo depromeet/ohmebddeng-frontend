@@ -54,7 +54,6 @@ const TestResult: NextPage = () => {
     <Container>
       {isResult ? (
         <TestResultWrapper>
-          <h1>당신의 레벨은????</h1>
           <div className="test-result__image-box">
             <img src="/images/lv1.png" alt="level_1" />
           </div>
