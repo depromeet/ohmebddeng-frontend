@@ -36,6 +36,7 @@
         },
         "newlines-between": "never"
       }
-    ]
+    ],
+    "import/no-anonymous-default-export": "off"
   }
 }

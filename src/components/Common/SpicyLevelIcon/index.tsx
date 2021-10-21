@@ -17,7 +17,6 @@ interface SpicyLevelIconProps {
   checked: boolean;
 }
 
-// 아이콘
 const SpicyLevelIcon = ({ level, checked }: SpicyLevelIconProps) => {
   const IconByLevel = {
     냠냠: <Image src={checked ? svg_0 : svg_0_disabled} alt={level} />,
