@@ -3,7 +3,6 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import TitleBar from '@/components/Common/TitleBar';
 import Button from '@/components/Input/Button';
 import { SpicyLevelForm, TasteForm } from '@/components/Review';
 import { ROUTES } from '@/constants';
@@ -75,10 +74,7 @@ const Review: NextPage = () => {
 
   return (
     <Container>
-      <TitleBar backButton={true} backLocation={ROUTES.HOME}>
-        당신의 매운 느낌을 표현해주세요
-      </TitleBar>
-      <div>
+      <ReviewContainer>
         {!isLoading &&
           Object.keys(Object.fromEntries(reviews)).map((foodName) => {
             const data = reviews.get(foodName);
@@ -99,7 +95,7 @@ const Review: NextPage = () => {
               </ReviewSection>
             );
           })}
-      </div>
+      </ReviewContainer>
       <Button
         buttonType={'contained'}
         color={isAllChecked ? 'red' : 'grey'}
@@ -117,13 +113,13 @@ const Container = styled.div`
   flex-direction: column;
   margin: 0 16px 0 17px;
   height: 100%;
+`;
 
-  & div:nth-child(2) {
-    margin: 16px 0 80px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px 0;
-  }
+const ReviewContainer = styled.div`
+  margin: 16px 0 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px 0;
 `;
 
 const ReviewSection = styled.section`
