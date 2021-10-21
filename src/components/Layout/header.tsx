@@ -36,7 +36,7 @@ const Header = () => {
       </CenterContainer>
     ),
   };
-  return headerByPathname[router.pathname];
+  return headerByPathname[router.pathname] ?? null;
 };
 
 const CenterContainer = styled.header`
