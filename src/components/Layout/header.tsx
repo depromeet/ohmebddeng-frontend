@@ -12,8 +12,6 @@ const Header = () => {
     // drawer navigator 클릭
   };
   const headerByPathname = {
-    [ROUTES.HOME]: null,
-    [ROUTES.LEVEL_TEST]: null,
     [ROUTES.MAIN]: (
       <SideContainer>
         <h2>오맵땡</h2>
