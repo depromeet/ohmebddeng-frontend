@@ -1,19 +1,23 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import Header from './header';
 
 interface Props {
   children?: React.ReactNode;
 }
-// TODO : Header 컴포넌트 추가
+
 const Layout = ({ children }: Props) => {
   return (
-    <>
+    <Container>
+      <Header />
       <Main>{children}</Main>
-    </>
+    </Container>
   );
 };
 
-const Main = styled.main`
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100vw;
   max-width: 414px;
   height: 100%;
@@ -27,6 +31,11 @@ const Main = styled.main`
     font-weight: normal;
     font-size: 22px;
   }
+`;
+
+const Main = styled.main`
+  width: 100%;
+  height: 100%;
 `;
 
 export default Layout;
