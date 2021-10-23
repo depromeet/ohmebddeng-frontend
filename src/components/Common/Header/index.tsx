@@ -11,7 +11,7 @@ const Header = ({ type, children }: HeaderProps) => {
     center: <CenterContainer>{children}</CenterContainer>,
     side: <SideContainer>{children}</SideContainer>,
   };
-  return headerType[type] ?? null;
+  return headerType[type];
 };
 
 const CenterContainer = styled.header`
