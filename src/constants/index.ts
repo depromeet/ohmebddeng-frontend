@@ -4,4 +4,5 @@ export const ROUTES = {
   REVIEW: '/review',
   TEST_RESULT: '/testResult',
   MAIN: '/main',
+  CATEGORY: '/category',
 };

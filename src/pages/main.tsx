@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import type { NextPage } from 'next';
+import Slider from 'react-slick';
 import { Category, ProfileCard } from '@/components/Main';
 import { USER_LEVEL } from '@/types';
 import svg_0 from 'public/assets/Main/0.svg';
@@ -7,6 +8,8 @@ import svg_1 from 'public/assets/Main/1.svg';
 import svg_2 from 'public/assets/Main/2.svg';
 import svg_3 from 'public/assets/Main/3.svg';
 import svg_random from 'public/assets/Main/random.svg';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const Recommend = {
   title: '오늘의 추천',
@@ -50,10 +53,20 @@ const Random = {
   height: 104,
 };
 
+const sliderSetting = {
+  dots: true,
+};
+
 const Main: NextPage = () => {
   return (
     <Container>
-      <ProfileCard level={USER_LEVEL.맵러버} />
+      <Slider {...sliderSetting}>
+        <ProfileCard level={USER_LEVEL.맵찔이} />
+        <ProfileCard level={USER_LEVEL.맵초보} />
+        <ProfileCard level={USER_LEVEL.맵러버} />
+        <ProfileCard level={USER_LEVEL.맵마스터} />
+        <ProfileCard level={USER_LEVEL.맵부심} />
+      </Slider>
       <Category title={Recommend.title} contents={Recommend.contents} />
       <Category
         title={Random.title}
@@ -70,6 +83,7 @@ const Container = styled.div`
   margin: 0 11.5px;
   font-weight: 800;
   gap: 30px 0;
+  overflow: hidden;
 `;
 
 export default Main;
