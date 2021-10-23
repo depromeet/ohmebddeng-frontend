@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@emotion/react';
 import type { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import DefaultHead from '@/components/Head';
 import Layout from '@/components/Layout';
 import { initMSW } from '@/lib/msw';
 import { GlobalStyle } from '@/styles';
@@ -12,6 +13,7 @@ const queryClient = new QueryClient();
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <DefaultHead />
       <GlobalStyle />
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
