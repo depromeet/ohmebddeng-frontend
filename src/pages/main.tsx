@@ -61,11 +61,9 @@ const Main: NextPage = () => {
   return (
     <Container>
       <Slider {...sliderSetting}>
-        <ProfileCard level={USER_LEVEL.맵찔이} />
-        <ProfileCard level={USER_LEVEL.맵초보} />
-        <ProfileCard level={USER_LEVEL.맵러버} />
-        <ProfileCard level={USER_LEVEL.맵마스터} />
-        <ProfileCard level={USER_LEVEL.맵부심} />
+        {Object.values(USER_LEVEL).map((level) => (
+          <ProfileCard level={level} key={level} />
+        ))}
       </Slider>
       <Category title={Recommend.title} contents={Recommend.contents} />
       <Category
