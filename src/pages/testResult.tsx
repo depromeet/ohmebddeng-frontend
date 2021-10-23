@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import Loading from '@/components/Common/Loading';
+import { Loading, Header } from '@/components/Common';
 import Button from '@/components/Input/Button';
 import { ROUTES } from '@/constants';
 import { initMSW } from '@/lib/msw';
@@ -51,41 +51,46 @@ const TestResult: NextPage = () => {
   }, []);
 
   return (
-    <Container>
-      {isResult ? (
-        <TestResultWrapper>
-          <div className="test-result__image-box">
-            <img src="/images/lv1.png" alt="level_1" />
+    <>
+      <Header type="center">
+        <span>당신의 레벨은?</span>
+      </Header>
+      <Container>
+        {isResult ? (
+          <TestResultWrapper>
+            <div className="test-result__image-box">
+              <img src="/images/lv1.png" alt="level_1" />
+            </div>
+            <ResultText level={1} />
+            <div className="test-result__buttons">
+              <Button
+                buttonType="contained"
+                color="red"
+                rounded
+                fullWidth
+                onClick={goHome}
+              >
+                홈으로
+              </Button>
+              <Button
+                fullWidth
+                buttonType="outline"
+                color="red"
+                rounded
+                onClick={shareMyResult}
+              >
+                맵순위 공유하기
+              </Button>
+            </div>
+          </TestResultWrapper>
+        ) : (
+          <div className="loading-box">
+            <p>맵레벨을 측정 하고 있어요</p>
+            <Loading />
           </div>
-          <ResultText level={1} />
-          <div className="test-result__buttons">
-            <Button
-              buttonType="contained"
-              color="red"
-              rounded
-              fullWidth
-              onClick={goHome}
-            >
-              홈으로
-            </Button>
-            <Button
-              fullWidth
-              buttonType="outline"
-              color="red"
-              rounded
-              onClick={shareMyResult}
-            >
-              맵순위 공유하기
-            </Button>
-          </div>
-        </TestResultWrapper>
-      ) : (
-        <div className="loading-box">
-          <p>맵레벨을 측정 하고 있어요</p>
-          <Loading />
-        </div>
-      )}
-    </Container>
+        )}
+      </Container>
+    </>
   );
 };
 
