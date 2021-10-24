@@ -9,7 +9,7 @@ import {
   postLevelTestQuery,
 } from '@/api/levelTest';
 import { AnonymousUser, getAnonymousUserQuery } from '@/api/user';
-import { TitleBar } from '@/components/Common';
+import { Header } from '@/components/Common';
 import { SpicyLevelForm } from '@/components/Review';
 import { ROUTES } from '@/constants';
 import { LEVEL } from '@/types';
@@ -63,9 +63,9 @@ export default function LevelTestPage() {
       {
         foods?.data.foodList.map((food) => (
           <div key={food.id}>
-            <TitleBar backButton={false}>
+            <Header type="center">
               맵레벨 테스트 ({step}/{foods.data.foodList.length})
-            </TitleBar>
+            </Header>
             <div
               css={css`
                 width: 100%;

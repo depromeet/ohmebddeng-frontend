@@ -1,8 +1,11 @@
 import styled from '@emotion/styled';
 import type { NextPage } from 'next';
+import Image from 'next/image';
 import Slider from 'react-slick';
+import { Header } from '@/components/Common';
 import { Category, ProfileCard } from '@/components/Main';
 import { USER_LEVEL } from '@/types';
+import drawer_navigator from 'public/assets/common/hamburger.svg';
 import svg_0 from 'public/assets/Main/0.svg';
 import svg_1 from 'public/assets/Main/1.svg';
 import svg_2 from 'public/assets/Main/2.svg';
@@ -59,19 +62,25 @@ const sliderSetting = {
 
 const Main: NextPage = () => {
   return (
-    <Container>
-      <Slider {...sliderSetting}>
-        {Object.values(USER_LEVEL).map((level) => (
-          <ProfileCard level={level} key={level} />
-        ))}
-      </Slider>
-      <Category title={Recommend.title} contents={Recommend.contents} />
-      <Category
-        title={Random.title}
-        contents={Random.contents}
-        height={Random.height}
-      />
-    </Container>
+    <>
+      <Header type="side">
+        <h2>오맵땡</h2>
+        <Image src={drawer_navigator} alt="drawer_navigator" layout="fixed" />
+      </Header>
+      <Container>
+        <Slider {...sliderSetting}>
+          {Object.values(USER_LEVEL).map((level) => (
+            <ProfileCard level={level} key={level} />
+          ))}
+        </Slider>
+        <Category title={Recommend.title} contents={Recommend.contents} />
+        <Category
+          title={Random.title}
+          contents={Random.contents}
+          height={Random.height}
+        />
+      </Container>
+    </>
   );
 };
 

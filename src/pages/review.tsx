@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
+import { Header } from '@/components/Common';
 import Button from '@/components/Input/Button';
 import { SpicyLevelForm, TasteForm } from '@/components/Review';
 import { ROUTES } from '@/constants';
@@ -73,38 +74,43 @@ const Review: NextPage = () => {
     };
 
   return (
-    <Container>
-      <ReviewContainer>
-        {!isLoading &&
-          Object.keys(Object.fromEntries(reviews)).map((foodName) => {
-            const data = reviews.get(foodName);
-            return (
-              <ReviewSection key={foodName}>
-                <div>
-                  <Image src={svg_0} alt="thumnail" />
-                  <h2>{foodName}</h2>
-                </div>
-                <SpicyLevelForm
-                  level={data?.level}
-                  onChange={handleCheckLevel(foodName)}
-                />
-                <TasteForm
-                  taste={data?.taste}
-                  onChange={handleCheckTaste(foodName)}
-                />
-              </ReviewSection>
-            );
-          })}
-      </ReviewContainer>
-      <Button
-        buttonType={'contained'}
-        color={isAllChecked ? 'red' : 'grey'}
-        rounded={false}
-        onClick={handleSubmit}
-      >
-        완료
-      </Button>
-    </Container>
+    <>
+      <Header type="center">
+        <span>리뷰 3개만 부탁해...</span>
+      </Header>
+      <Container>
+        <ReviewContainer>
+          {!isLoading &&
+            Object.keys(Object.fromEntries(reviews)).map((foodName) => {
+              const data = reviews.get(foodName);
+              return (
+                <ReviewSection key={foodName}>
+                  <div>
+                    <Image src={svg_0} alt="thumnail" />
+                    <h2>{foodName}</h2>
+                  </div>
+                  <SpicyLevelForm
+                    level={data?.level}
+                    onChange={handleCheckLevel(foodName)}
+                  />
+                  <TasteForm
+                    taste={data?.taste}
+                    onChange={handleCheckTaste(foodName)}
+                  />
+                </ReviewSection>
+              );
+            })}
+        </ReviewContainer>
+        <Button
+          buttonType={'contained'}
+          color={isAllChecked ? 'red' : 'grey'}
+          rounded={false}
+          onClick={handleSubmit}
+        >
+          완료
+        </Button>
+      </Container>
+    </>
   );
 };
 

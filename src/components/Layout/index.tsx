@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import Header from './header';
 
 interface Props {
   children?: React.ReactNode;
@@ -8,14 +7,13 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <Container>
-      <Header />
+    <>
       <Main>{children}</Main>
-    </Container>
+    </>
   );
 };
 
-const Container = styled.div`
+const Main = styled.main`
   display: flex;
   flex-direction: column;
   width: 100vw;
@@ -31,11 +29,6 @@ const Container = styled.div`
     font-weight: normal;
     font-size: 22px;
   }
-`;
-
-const Main = styled.main`
-  width: 100%;
-  height: 100%;
 `;
 
 export default Layout;
