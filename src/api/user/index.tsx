@@ -1,16 +1,12 @@
-import { apiClient } from '@/api';
+import { apiClient, Response } from '@/api';
 
 export const anonymousUserIdKey = 'ohmebddeng-anonymous-user-id';
 export const userIdKey = 'ohmebddeng-user-id';
 
-export interface AnonymousUser {
-  data: {
-    anonymousId: string;
-    userId: string;
-  };
-  statusCode: number;
-  message: string;
-}
+export type AnonymousUser = Response<{
+  anonymousId: string;
+  userId: string;
+}>;
 
 export const getAnonymousUserQuery = async () => {
   try {
@@ -56,3 +52,17 @@ export interface User {
   statusCode: number;
   message: string;
 }
+
+export type UserCount = { count: number; levelTestedOnly: boolean };
+
+export const getUserCount = async () => {
+  const {
+    data: { data },
+  } = await apiClient.get<Response<UserCount>>(`/user/count`, {
+    params: {
+      levelTestedOnly: false,
+    },
+  });
+
+  return data;
+};
