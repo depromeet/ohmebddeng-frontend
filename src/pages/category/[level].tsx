@@ -3,12 +3,21 @@ import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useCallback } from 'react';
 import { Header } from '@/components/Common';
+import { ROUTES } from '@/constants';
 import { TASTE_LEVEL } from '@/types';
 
 const CategoryByTaste: NextPage = () => {
   const router = useRouter();
   const { level } = router.query;
+
+  const handleClickTab = useCallback(
+    (level: TASTE_LEVEL) => () => {
+      router.push(`${ROUTES.CATEGORY}/${level}`);
+    },
+    [router]
+  );
 
   return (
     <div>
@@ -16,7 +25,11 @@ const CategoryByTaste: NextPage = () => {
       <Wrapper>
         <Tabs>
           {Object.values(TASTE_LEVEL).map((_level) => (
-            <Tab key={_level} active={_level === level}>
+            <Tab
+              key={_level}
+              active={_level === level}
+              onClick={handleClickTab(_level)}
+            >
               {_level}
             </Tab>
           ))}
