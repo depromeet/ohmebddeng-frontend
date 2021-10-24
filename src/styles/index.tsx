@@ -28,8 +28,8 @@ export const GlobalStyle = () => {
           margin: 0;
         }
 
-        ul[role='list'],
-        ol[role='list'] {
+        ul,
+        ol {
           list-style: none;
         }
 
@@ -40,7 +40,7 @@ export const GlobalStyle = () => {
         body {
           min-height: 100vh;
           text-rendering: optimizeSpeed;
-          line-height: 1.5;
+          line-height: 1.4;
           display: flex;
           justify-content: center;
           background-color: #1f1f1f;

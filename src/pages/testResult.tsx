@@ -12,7 +12,8 @@ initMSW();
 const TestResult: NextPage = () => {
   const [isResult, setIsResult] = useState<boolean>(false);
   const router = useRouter();
-
+  // as로 강제하지 않을 방법? HOC?
+  const userLevel = router.query.level as string;
   const goHome = () => {
     router.push(ROUTES.HOME);
   };
@@ -59,12 +60,33 @@ const TestResult: NextPage = () => {
         {isResult ? (
           <TestResultWrapper>
             <div className="test-result__image-box">
-              <img src="/images/lv1.png" alt="level_1" />
+              <img
+                src={`/images/lv${userLevel}.png`}
+                alt={`level_${userLevel}`}
+              />
             </div>
-            <ResultText level={1} />
+            <ResultText level={userLevel} />
+            <div className="test-result__content-box">
+              <h3>맵찔이 특</h3>
+              <ol>
+                <li>1. 떡볶이 매움</li>
+                <li>2. 라면 매움</li>
+                <li>3. 아구찜 매움</li>
+                <li>4. 친구랑 같이 매운거 먹으면 솔직히 속쓰림</li>
+                <li>5. 아무튼 난 입맛이 순수한거임</li>
+              </ol>
+            </div>
+            <div className="test-result__content-box">
+              <h3>맵찔이를 위한 음식</h3>
+              <ul>
+                <li>진라면 순한맛</li>
+                <li>엽기떡볶이 착한맛</li>
+                <li>굽네치킨 고추 바사삭</li>
+              </ul>
+            </div>
             <div className="test-result__buttons">
               <Button
-                buttonType="contained"
+                buttonType="outline"
                 color="red"
                 rounded
                 fullWidth
@@ -74,7 +96,7 @@ const TestResult: NextPage = () => {
               </Button>
               <Button
                 fullWidth
-                buttonType="outline"
+                buttonType="contained"
                 color="red"
                 rounded
                 onClick={shareMyResult}
@@ -99,6 +121,8 @@ const Container = styled.div`
 `;
 
 const TestResultWrapper = styled.div`
+  margin-bottom: 40px;
+
   h1 {
     font-size: 17px;
     text-align: center;
@@ -108,6 +132,29 @@ const TestResultWrapper = styled.div`
 
   .test-result {
     &__image-box {
+    }
+    &__content-box {
+      background: ${({ theme }) => theme.colors.background};
+      padding: 24px 0 26px 0;
+      margin-top: 20px;
+      border-radius: 14px;
+
+      h3 {
+        font-size: 17px;
+      }
+
+      ol,
+      ul {
+        margin-top: 20px;
+        li {
+          text-align: left;
+          display: flex;
+          align-items: center;
+        }
+        li + li {
+          margin-top: 5px;
+        }
+      }
     }
     &__buttons {
       margin-top: 33px;
@@ -132,7 +179,7 @@ const TestResultWrapper = styled.div`
 `;
 
 type ResultText = {
-  level: number;
+  level: string;
 };
 
 const ResultText = ({ level }: ResultText) => {
@@ -146,10 +193,10 @@ const ResultText = ({ level }: ResultText) => {
 };
 
 const ResultTextWrapper = styled.div`
-  background: rgba(255, 255, 255, 0.1);
+  background: ${({ theme }) => theme.colors.background};
+  border: 1px solid white;
   border-radius: 14px;
-  padding: 32px 0;
-  height: 188px;
+  padding: 32px 0 42px 0;
 
   h2 {
     font-size: 22px;
@@ -169,7 +216,7 @@ type InfoType = {
   content: string;
 };
 
-const levelInfo: { [key: number]: InfoType } = {
+const levelInfo: { [key: string]: InfoType } = {
   1: {
     img: '',
     title: '당신의 불타는 똥꼬',
