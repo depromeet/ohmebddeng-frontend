@@ -48,7 +48,7 @@ const Review: NextPage = () => {
       return;
     }
     //TODO. 리뷰 결과로 만들어진 레벨을 push와 함께 테스트결과 페이지로 전송해야함
-    router.push({ pathname: ROUTES.TEST_RESULT, query: { level: 3 } });
+    router.push({ pathname: ROUTES.TEST_RESULT, query: { level: 1 } });
   };
 
   const handleCheckLevel =

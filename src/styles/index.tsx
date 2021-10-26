@@ -24,8 +24,11 @@ export const GlobalStyle = () => {
         figure,
         blockquote,
         dl,
-        dd {
+        dd,
+        ul,
+        ol {
           margin: 0;
+          padding: 0;
         }
 
         ul,
