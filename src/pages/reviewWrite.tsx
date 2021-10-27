@@ -1,23 +1,34 @@
 import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { Header } from '@/components/Common';
-import { SpicyLevelForm } from '@/components/Review';
+import Button from '@/components/Input/Button';
+import { SpicyLevelForm, TasteForm } from '@/components/Review';
 import theme from '@/styles/theme';
-import { Food, LEVEL, ReviewState } from '@/types';
+import { Food, LEVEL, ReviewState, TASTE } from '@/types';
 
 const ReviewWrite: NextPage<Food> = ({
   image_url = '/assets/FoodReview/0.svg',
   name = '진라면 순한맛',
   id = 1,
 }) => {
-  const [review, setReview] = useState<ReviewState>();
+  const [review, setReview] = useState<ReviewState>({ taste: new Set() });
 
   const handleCheckLevel =
     () => (event: React.ChangeEvent<HTMLInputElement>) => {
       const level = (event.target as HTMLInputElement).value as LEVEL;
       setReview({ level });
+    };
+  const handleCheckTaste =
+    () => (event: React.ChangeEvent<HTMLInputElement>) => {
+      const targetTaste = (event.target as HTMLInputElement).value as TASTE;
+      const taste = review.taste ?? new Set();
+      taste.has(targetTaste)
+        ? taste.delete(targetTaste)
+        : taste.add(targetTaste);
+      setReview({ taste });
     };
 
   return (
@@ -68,11 +79,31 @@ const ReviewWrite: NextPage<Food> = ({
           </h3>
           <SpicyLevelForm level={review?.level} onChange={handleCheckLevel()} />
         </section>
+
+        <TasteSection>
+          <h3>어땠나요?</h3>
+          <TasteForm taste={review?.taste} onChange={handleCheckTaste()} />
+        </TasteSection>
+
+        <Button
+          buttonType="contained"
+          color="red"
+          rounded={false}
+          css={css`
+            width: 100%;
+          `}
+          onClick={() => alert('음식상세 페이지로 이동하겠죠...?')}
+        >
+          등록
+        </Button>
       </div>
     </div>
   );
 };
 
-export default ReviewWrite;
+const TasteSection = styled.div`
+  padding: 24px 26px 48px;
+  text-align: left;
+`;
 
-const size = 12;
+export default ReviewWrite;
