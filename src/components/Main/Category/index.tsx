@@ -14,9 +14,9 @@ export interface CategoryProps extends ItemProps {
   disabled?: boolean;
   title: string;
   contents: {
-    textFirst: string;
+    textFirst?: string;
     textSecond?: string;
-    image: string;
+    image?: string;
     color: string;
   }[];
 }
@@ -35,20 +35,22 @@ const Category = ({
       <Title>{title}</Title>
       <Content>
         {contents.map((content, index) => (
-          <Item
-            key={`${content.textFirst}${index}`}
-            color={content.color}
-            {...props}
-          >
+          <Item key={`Item${index}`} color={content.color} {...props}>
             <ItemContent>
-              <Image
-                src={content.image}
-                alt={`${content.textFirst}${
-                  content.textSecond ? ` ${content.textSecond}` : ``
-                }`}
-              />
-              <br />
-              {content.textFirst}
+              {content.image && (
+                <Image
+                  src={content.image}
+                  alt={`${
+                    content.textFirst ? content.textFirst : 'disable item'
+                  }${content.textSecond ? ` ${content.textSecond}` : ``}`}
+                />
+              )}
+              {content.textFirst && (
+                <>
+                  <br />
+                  {content.textFirst}
+                </>
+              )}
               {content.textSecond && (
                 <>
                   <br />
