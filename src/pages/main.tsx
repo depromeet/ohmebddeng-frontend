@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import { useState } from 'react';
 import Slider from 'react-slick';
 import { Header } from '@/components/Common';
 import { Category, ProfileCard } from '@/components/Main';
@@ -61,6 +62,8 @@ const sliderSetting = {
 };
 
 const Main: NextPage = () => {
+  const [isTest] = useState<boolean>(false);
+
   return (
     <>
       <Header type="side">
@@ -68,17 +71,30 @@ const Main: NextPage = () => {
         <Image src={drawer_navigator} alt="drawer_navigator" layout="fixed" />
       </Header>
       <Container>
-        <Slider {...sliderSetting}>
-          {Object.values(USER_LEVEL).map((level) => (
-            <ProfileCard level={level} key={level} />
-          ))}
-        </Slider>
-        <Category title={Recommend.title} contents={Recommend.contents} />
-        <Category
-          title={Random.title}
-          contents={Random.contents}
-          height={Random.height}
-        />
+        {isTest ? (
+          <>
+            <Slider {...sliderSetting}>
+              {Object.values(USER_LEVEL).map((level) => (
+                <ProfileCard level={level} key={level} />
+              ))}
+            </Slider>
+            <Category {...Recommend} />
+            <Category {...Random} />
+          </>
+        ) : (
+          <>
+            <Slider {...sliderSetting}>
+              {Object.values(USER_LEVEL).map((level) => (
+                <ProfileCard level={level} key={level} />
+              ))}
+            </Slider>
+            <Category
+              disabled
+              title={Recommend.title}
+              contents={Recommend.contents.slice(0, 2)}
+            />
+          </>
+        )}
       </Container>
     </>
   );
@@ -92,5 +108,4 @@ const Container = styled.div`
   gap: 30px 0;
   overflow: hidden;
 `;
-
 export default Main;
