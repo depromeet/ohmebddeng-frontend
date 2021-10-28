@@ -97,10 +97,9 @@ const UserLevelContainer = styled.div`
 `;
 
 const DropDownContent = styled.ul`
-  list-style-type: none;
   position: absolute;
   z-index: 1;
-  background-color: #1f1f1f;
+  background-color: ${({ theme }) => theme.colors.background};
   padding: 10px;
 `;
 
