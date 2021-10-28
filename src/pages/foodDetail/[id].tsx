@@ -104,6 +104,10 @@ const DropDownContent = styled.ul`
   display: none;
   background-color: #1f1f1f;
   padding: 10px;
+
+  & li {
+    cursor: pointer;
+  }
 `;
 
 const DropDownBtn = styled.button`
