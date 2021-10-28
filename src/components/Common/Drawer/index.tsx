@@ -54,7 +54,8 @@ const Drawer = ({ closeDrawerHandler, isOpen = false }: DrawerProps) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
+  top: 0;
   left: 0;
   width: 300px;
   height: 100%;
