@@ -19,13 +19,11 @@ const ReviewWrite: NextPage<Food> = ({
   const [review, setReview] = useState<ReviewState>({ taste: new Set() });
   const food = { image_url, name, id } as Food;
 
-  const handleCheckLevel =
-    () => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheckLevel =(event: React.ChangeEvent<HTMLInputElement>) => {
       const level = (event.target as HTMLInputElement).value as LEVEL;
       setReview({ ...review, level });
     };
-  const handleCheckTaste =
-    () => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheckTaste =(event: React.ChangeEvent<HTMLInputElement>) => {
       const targetTaste = (event.target as HTMLInputElement).value as TASTE;
       const taste = review.taste ?? new Set();
       taste.has(targetTaste)
@@ -47,11 +45,11 @@ const ReviewWrite: NextPage<Food> = ({
       <SpicyLevelSection
         disabled={false}
         level={review?.level}
-        onChange={handleCheckLevel()}
+        onChange={handleCheckLevel}
       />
       <TasteSection>
         <h3>어땠나요?</h3>
-        <TasteForm taste={review?.taste} onChange={handleCheckTaste()} />
+        <TasteForm taste={review?.taste} onChange={handleCheckTaste} />
       </TasteSection>
 
       <Button
@@ -61,7 +59,7 @@ const ReviewWrite: NextPage<Food> = ({
         css={css`
           width: 100%;
         `}
-        onClick={() => handleClick()}
+        onClick={handleClick}
       >
         등록
       </Button>
