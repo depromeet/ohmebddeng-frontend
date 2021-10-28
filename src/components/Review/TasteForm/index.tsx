@@ -28,7 +28,6 @@ const Form = styled.form`
   flex-wrap: wrap;
   gap: 9px 12px;
   padding-top: 20px;
-  border-top: ${({ theme }) => `1px solid ${theme.colors.grey40}`};
 `;
 
 export default TasteForm;
