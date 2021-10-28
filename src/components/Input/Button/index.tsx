@@ -7,6 +7,7 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   color: 'green' | 'red' | 'grey';
   rounded: boolean;
   fullWidth?: boolean;
+  dense?: boolean;
   children?: React.ReactNode;
 }
 
@@ -21,7 +22,7 @@ const StyledButton = styled.button<ButtonProps>`
 
   font-weight: bold;
   font-size: 15px;
-  line-height: 140%;
+  line-height: ${({ dense = false }) => (dense ? '30%' : '140%')};
 
   text-align: center;
   letter-spacing: 1.66667px;
