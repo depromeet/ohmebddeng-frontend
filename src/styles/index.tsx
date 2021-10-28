@@ -36,6 +36,11 @@ export const GlobalStyle = () => {
           list-style: none;
         }
 
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+
         html:focus-within {
           scroll-behavior: smooth;
         }
