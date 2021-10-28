@@ -43,9 +43,7 @@ const FoodDetail: NextPage = () => {
 
   return (
     <>
-      <Header type="center">
-        <span>불닭볶음면 까르보나라맛</span>
-      </Header>
+      <Header type="center">불닭볶음면 까르보나라맛</Header>
       <Container>
         {/* <FoodOverview
           image_url={`https://cdn.ohmebddeng.kr/foods/ramyeon.png`}
