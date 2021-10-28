@@ -43,7 +43,9 @@ const FoodDetail: NextPage = () => {
 
   return (
     <>
-      <Header type="center">불닭볶음면 까르보나라맛</Header>
+      <Header type="center">
+        <span>불닭볶음면 까르보나라맛</span>
+      </Header>
       <Container>
         {/* <FoodOverview
           image_url={`https://cdn.ohmebddeng.kr/foods/ramyeon.png`}
@@ -99,7 +101,8 @@ const UserLevelContainer = styled.div`
 const DropDownContent = styled.ul`
   position: absolute;
   z-index: 1;
-  background-color: ${({ theme }) => theme.colors.background};
+  display: none;
+  background-color: #1f1f1f;
   padding: 10px;
 `;
 
