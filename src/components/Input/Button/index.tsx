@@ -42,10 +42,10 @@ const StyledButton = styled.button<ButtonProps>`
     buttonType === 'outline' &&
     css`
       border: 1px solid ${getColor(color, theme)};
-      :hover {
+      /* :hover {
         color: ${color === 'green' ? theme.colors.black : theme.colors.white};
         background-color: ${getColor(color, theme)};
-      }
+      } */
     `}
   ${({ rounded = false }) =>
     rounded &&

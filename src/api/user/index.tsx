@@ -66,3 +66,9 @@ export const getUserCount = async () => {
 
   return data;
 };
+
+export const getUserData = async () => {
+  const userId = localStorage.getItem(userIdKey);
+  const { data } = await apiClient.get<User>(`/user/${userId}`);
+  return data;
+};
