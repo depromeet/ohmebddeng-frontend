@@ -10,9 +10,8 @@ export interface TasteEvaluationProps {
 
 const TasteEvaluation = ({ countData, totalCount }: TasteEvaluationProps) => {
   const router = useRouter();
-  const handleClick = useCallback(() => {
-    router.push(ROUTES.REVIEW_WRITE);
-  }, [router]);
+  const foodId = router.query.id as string;
+  const handleClick = () => router.push(`${ROUTES.REVIEW_WRITE}/${foodId}`);
 
   return (
     <>

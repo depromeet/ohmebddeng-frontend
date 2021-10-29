@@ -4,7 +4,7 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import { FoodOne, getFoodQuery } from '@/api/food';
+import { FoodDetails, getFoodDetail } from '@/api/foodDetail';
 import { postInitialReviewQuery } from '@/api/initialReview';
 import { Header, SpicyLevelSection } from '@/components/Common';
 import FoodOverview from '@/components/Common/FoodOverview';
@@ -15,18 +15,20 @@ import { Food, LEVEL, ReviewState, TASTE } from '@/types';
 
 const ReviewWrite: NextPage<Food> = () => {
   const router = useRouter();
-  const [isTestDone, setIsTestDone] = useState(false);
   const foodId = router.query.id as string;
+  const [isTestDone, setIsTestDone] = useState(false);
   const [review, setReview] = useState<ReviewState>({});
-  const { data: foodOne } = useQuery<FoodOne>(['FoodOne', foodId], () =>
-    getFoodQuery(foodId)
+  const { data: foodDetail } = useQuery<FoodDetails>(
+    ['FoodDetails', foodId],
+    () => getFoodDetail(foodId),
+    { enabled: !!foodId }
   );
 
   const food = {
     id: foodId,
-    imageUrl: foodOne ? foodOne.data.imageUrl : '',
-    name: foodOne ? foodOne.data.name : '',
-    subName: foodOne ? foodOne.data.subName : '',
+    imageUrl: foodDetail ? foodDetail.data.imageUrl : '',
+    name: foodDetail ? foodDetail.data.name : '',
+    subName: foodDetail ? foodDetail.data.subName : '',
   };
 
   const mutation = useMutation(postInitialReviewQuery, {
@@ -66,8 +68,7 @@ const ReviewWrite: NextPage<Food> = () => {
         <span>리뷰 작성하기</span>
       </Header>
 
-      <FoodOverview {...food} />
-
+      {food.imageUrl && <FoodOverview {...food} />}
       <SpicyLevelSection
         disabled={false}
         level={review?.level}
