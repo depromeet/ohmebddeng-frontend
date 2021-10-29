@@ -2,10 +2,10 @@ import { css } from '@emotion/react';
 import React from 'react';
 import { SpicyLevelForm } from '@/components/Common';
 import theme from '@/styles/theme';
-import { LEVEL } from '@/types';
+import { HOT_LEVEL_SERVER } from '@/types';
 
 export interface SpicyLevelSectionProps {
-  level?: LEVEL;
+  level?: HOT_LEVEL_SERVER;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
 }

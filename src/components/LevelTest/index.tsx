@@ -11,15 +11,17 @@ import { AnonymousUser, getAnonymousUserQuery } from '@/api/user';
 import { Header, SpicyLevelSection } from '@/components/Common';
 import FoodOverview from '@/components/Common/FoodOverview';
 import { ROUTES } from '@/constants';
-import { LEVEL } from '@/types';
+import { HOT_LEVEL_CLIENT, HOT_LEVEL_SERVER } from '@/types';
 
 export default function LevelTestPage() {
   const theme = useTheme();
   const router = useRouter();
   const [step, setStep] = useState(1);
   const index = useMemo(() => step - 1, [step]);
-  const [level, setLevel] = useState<LEVEL | undefined>(undefined);
-  const [result, setResult] = useState<{ [foodId: string]: LEVEL }>({});
+  const [level, setLevel] = useState<HOT_LEVEL_SERVER | undefined>(undefined);
+  const [result, setResult] = useState<{ [foodId: string]: HOT_LEVEL_SERVER }>(
+    {}
+  );
   const [testIsDone, setTestIsDone] = useState(false);
   const { data: foods } = useQuery<LevelTestFoods>(
     ['levelTestFoods'],
@@ -29,7 +31,7 @@ export default function LevelTestPage() {
   const goToNextStep = useCallback(
     (foodId: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const timeToDelay = 0.5 * 1000;
-      const selectedLevel = e.target.value as LEVEL;
+      const selectedLevel = e.target.value as HOT_LEVEL_SERVER;
       setLevel(selectedLevel);
       setResult({ ...result, [foodId]: selectedLevel });
 

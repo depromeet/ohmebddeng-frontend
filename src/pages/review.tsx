@@ -10,7 +10,12 @@ import { Header, SpicyLevelForm } from '@/components/Common';
 import Button from '@/components/Input/Button';
 import { TasteForm } from '@/components/Review';
 import { ROUTES } from '@/constants';
-import { LEVEL, TASTE, ReviewState } from '@/types';
+import {
+  HOT_LEVEL_CLIENT,
+  HOT_LEVEL_SERVER,
+  TASTE,
+  ReviewState,
+} from '@/types';
 import svg_0 from 'public/assets/FoodReview/0.svg';
 
 const foodInfo = new Map();
@@ -54,16 +59,24 @@ const Review: NextPage = () => {
       return;
     }
     let result = [] as CreatedReview[];
-    reviews.forEach(({ level = LEVEL.냠냠, taste = [] }, foodName) => {
-      const tagIds = Array.from(taste);
-      result.push({ hotLevel: level, tagIds, foodId: foodInfo.get(foodName) });
-    });
-    mutation.mutate(result);
+    reviews.forEach(
+      ({ level = HOT_LEVEL_SERVER.냠냠, taste = [] }, foodName) => {
+        const tagIds = Array.from(taste);
+        result.push({
+          hotLevel: level,
+          tagIds,
+          foodId: foodInfo.get(foodName),
+        });
+      }
+    );
+    console.log(result);
+    // mutation.mutate(result);
   };
 
   const handleCheckLevel =
     (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      const level = (event.target as HTMLInputElement).value as LEVEL;
+      const level = (event.target as HTMLInputElement)
+        .value as HOT_LEVEL_SERVER;
       setReviews(
         (prev) =>
           new Map(prev.set(name, { level, taste: prev.get(name)?.taste }))

@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { SpicyLevelInput } from '@/components/Common';
-import { LEVEL } from '@/types';
+import { HOT_LEVEL_SERVER, HOT_LEVEL_CLIENT } from '@/types';
 
 export interface SpicyLevelFormProps {
-  level?: LEVEL;
+  level?: HOT_LEVEL_SERVER;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
 }
@@ -12,11 +12,11 @@ export interface SpicyLevelFormProps {
 const SpicyLevelForm = ({ level, ...props }: SpicyLevelFormProps) => {
   return (
     <Form id="spicyLevelForm">
-      {Object.values(LEVEL).map((name) => (
+      {Object.values(HOT_LEVEL_CLIENT).map((name) => (
         <SpicyLevelInput
           key={name}
           name={name}
-          checked={level === name}
+          checked={level === HOT_LEVEL_SERVER[name]}
           {...props}
         />
       ))}

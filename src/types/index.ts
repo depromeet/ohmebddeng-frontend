@@ -4,13 +4,6 @@ export enum TASTE_LEVEL {
   씁하 = '씁하',
   헥헥 = '헥헥',
 }
-export enum LEVEL {
-  냠냠 = '냠냠',
-  쓰읍 = '쓰읍',
-  씁하 = '씁하',
-  헥헥 = '헥헥',
-  모름 = '모름',
-}
 
 export enum TASTE {
   매콤달콤한 = '매콤달콤한',
@@ -19,12 +12,6 @@ export enum TASTE {
   얼큰한 = '얼큰한',
   얼얼한 = '얼얼한',
   알싸한 = '알싸한',
-}
-
-export enum INITIAL_FOOD {
-  FOOD1 = '진라면 매운맛',
-  FOOD2 = '불닭 볶음면',
-  FOOD3 = '신라면',
 }
 
 export enum USER_LEVEL {
@@ -36,7 +23,7 @@ export enum USER_LEVEL {
 }
 
 export interface ReviewState {
-  level?: LEVEL;
+  level?: HOT_LEVEL_SERVER;
   taste?: Set<TASTE>;
 }
 
@@ -45,4 +32,20 @@ export interface Food {
   name: string;
   subName: string;
   imageUrl: string;
+}
+
+export enum HOT_LEVEL_CLIENT {
+  EASY = '냠냠',
+  NORMAL = '쓰읍',
+  HOT = '씁하',
+  HOTTEST = '헥헥',
+  NEVER_TRIED = '모름',
+}
+
+export enum HOT_LEVEL_SERVER {
+  냠냠 = 'EASY',
+  쓰읍 = 'NORMAL',
+  씁하 = 'HOT',
+  헥헥 = 'HOTTEST',
+  모름 = 'NEVER_TRIED',
 }
