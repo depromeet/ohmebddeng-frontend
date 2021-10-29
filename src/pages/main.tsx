@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import { useState } from 'react';
 import Slider from 'react-slick';
-import { Header } from '@/components/Common';
+import { Header, Drawer } from '@/components/Common';
 import { Category, ProfileCard } from '@/components/Main';
 import { USER_LEVEL } from '@/types';
 import drawer_navigator from 'public/assets/common/hamburger.svg';
@@ -62,13 +62,23 @@ const sliderSetting = {
 };
 
 const Main: NextPage = () => {
-  const [isTest] = useState<boolean>(false);
+  const [isTest] = useState(false);
+  const [drawerOpend, setDrawerOpend] = useState(false);
+
+  const handleDrawerOpen = () => setDrawerOpend(true);
+  const hanldeDrawerClose = () => setDrawerOpend(false);
 
   return (
     <>
+      <Drawer closeDrawerHandler={hanldeDrawerClose} isOpen={drawerOpend} />
       <Header type="side">
         <h2>오맵땡</h2>
-        <Image src={drawer_navigator} alt="drawer_navigator" layout="fixed" />
+        <Image
+          src={drawer_navigator}
+          alt="drawer_navigator"
+          layout="fixed"
+          onClick={handleDrawerOpen}
+        />
       </Header>
       <Container>
         {isTest ? (

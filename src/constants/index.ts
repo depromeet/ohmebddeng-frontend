@@ -6,5 +6,6 @@ export const ROUTES = {
   TEST_RESULT: '/testResult',
   MAIN: '/main',
   CATEGORY: '/category',
+  INQURY: '/inqury',
   FOOD_DETAIL: '/foodDetail',
 };
