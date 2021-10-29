@@ -3,34 +3,41 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
+import { useMutation, useQuery } from 'react-query';
+import {
+  getInitialReviewFoodQuery,
+  InitialReviewFood,
+  postInitialReviewQuery,
+} from '@/api/initialReview';
 import { Header, SpicyLevelForm } from '@/components/Common';
 import Button from '@/components/Input/Button';
 import { TasteForm } from '@/components/Review';
 import { ROUTES } from '@/constants';
-import { INITIAL_FOOD, LEVEL, TASTE, ReviewState } from '@/types';
+import { LEVEL, TASTE, ReviewState } from '@/types';
 import svg_0 from 'public/assets/FoodReview/0.svg';
 
-const init_food = [
-  { name: INITIAL_FOOD.FOOD1 },
-  { name: INITIAL_FOOD.FOOD2 },
-  { name: INITIAL_FOOD.FOOD3 },
-];
+const foodInfo = new Map();
 
 const Review: NextPage = () => {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
   const [isAllChecked, setIsAllChecked] = useState(false);
   const [reviews, setReviews] = useState<Map<string, ReviewState>>(new Map());
+  const { data: foods } = useQuery<InitialReviewFood>(
+    ['initialReviewFoods'],
+    () => getInitialReviewFoodQuery()
+  );
 
   useEffect(() => {
-    // 서버에서 리뷰 등록할 음식 가져오기
-    const map = new Map();
-    init_food.forEach((food) => {
-      map.set(food.name, {});
-    });
-    setReviews(map);
-    setIsLoading(false);
-  }, []);
+    if (foods?.data) {
+      const { foodList } = foods.data;
+      const map = new Map();
+      foodList.forEach(({ name, id }) => {
+        map.set(name, {});
+        foodInfo.set(name, id);
+        setReviews(map);
+      });
+    }
+  }, [foods]);
 
   useEffect(() => {
     for (const [_, { level, taste }] of Array.from(reviews.entries())) {
@@ -77,11 +84,11 @@ const Review: NextPage = () => {
   return (
     <>
       <Header type="center">
-        <span>리뷰 3개만 부탁해...</span>
+        <span>리뷰 5개만 부탁해...</span>
       </Header>
       <Container>
         <ReviewContainer>
-          {!isLoading &&
+          {foods &&
             Object.keys(Object.fromEntries(reviews)).map((foodName) => {
               const data = reviews.get(foodName);
               return (
