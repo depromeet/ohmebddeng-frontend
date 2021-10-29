@@ -75,8 +75,6 @@ const Main: NextPage = () => {
   const [drawerOpend, setDrawerOpend] = useState(false);
   const { data: user } = useQuery<User>(['getUser'], getUserQuery);
 
-  console.log(user?.data.userLevel.level);
-
   const handleDrawerOpen = () => setDrawerOpend(true);
   const hanldeDrawerClose = () => setDrawerOpend(false);
 

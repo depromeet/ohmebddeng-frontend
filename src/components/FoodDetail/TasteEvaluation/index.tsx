@@ -11,14 +11,15 @@ interface TasteData {
 
 export interface TasteEvaluationProps {
   testData: TasteData[];
+  foodId: string;
 }
 
-const TasteEvaluation = ({ testData }: TasteEvaluationProps) => {
+const TasteEvaluation = ({ testData, foodId }: TasteEvaluationProps) => {
   const router = useRouter();
   const totalCount = testData.reduce((r, c) => r + c.count, 0);
-  const handleClick = useCallback(() => {
-    router.push(ROUTES.REVIEW_WRITE);
-  }, [router]);
+  const handleClick = () => {
+    router.push(`${ROUTES.REVIEW_WRITE}/${foodId}`);
+  };
 
   return (
     <>

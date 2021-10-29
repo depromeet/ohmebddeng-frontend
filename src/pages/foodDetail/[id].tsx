@@ -27,7 +27,7 @@ const data = {
 
 const FoodDetail: NextPage = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const foodId = router.query.id as string;
   const dropwdownRef = useRef<HTMLUListElement>(null);
   const [selectedLevel, setSelectedLevel] = useState<USER_LEVEL>(
     USER_LEVEL.맵마스터
@@ -83,7 +83,7 @@ const FoodDetail: NextPage = () => {
           </div>
         </UserLevelContainer>
         <SpicyEvaluation testData={data.tasteLevel} totalCount={17} />
-        <TasteEvaluation testData={data.taste} />
+        <TasteEvaluation testData={data.taste} foodId={foodId} />
       </Container>
     </>
   );

@@ -2,8 +2,9 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import React, { useCallback, useState } from 'react';
-import { useMutation } from 'react-query';
+import React, { useEffect, useState } from 'react';
+import { useMutation, useQuery } from 'react-query';
+import { FoodOne, getFoodQuery } from '@/api/food';
 import { postInitialReviewQuery } from '@/api/initialReview';
 import { Header, SpicyLevelSection } from '@/components/Common';
 import FoodOverview from '@/components/Common/FoodOverview';
@@ -12,15 +13,21 @@ import { TasteForm } from '@/components/Review';
 import { ROUTES } from '@/constants';
 import { Food, LEVEL, ReviewState, TASTE } from '@/types';
 
-const ReviewWrite: NextPage<Food> = ({
-  imageUrl = '/assets/FoodReview/0.svg',
-  name = '진라면',
-  subName = '순한맛',
-}) => {
+const ReviewWrite: NextPage<Food> = () => {
   const router = useRouter();
+  const [isTestDone, setIsTestDone] = useState(false);
   const foodId = router.query.id as string;
   const [review, setReview] = useState<ReviewState>({});
-  const food = { imageUrl, name, subName } as Food;
+  const { data: foodOne } = useQuery<FoodOne>(['FoodOne', foodId], () =>
+    getFoodQuery(foodId)
+  );
+
+  const food = {
+    id: foodId,
+    imageUrl: foodOne ? foodOne.data.imageUrl : '',
+    name: foodOne ? foodOne.data.name : '',
+    subName: foodOne ? foodOne.data.subName : '',
+  };
 
   const mutation = useMutation(postInitialReviewQuery, {
     onSuccess: () => router.push(`${ROUTES.FOOD_DETAIL}/${foodId}`),
@@ -37,9 +44,21 @@ const ReviewWrite: NextPage<Food> = ({
     setReview({ ...review, taste });
   };
   const handleSubmit = () => {
+    if (!isTestDone) {
+      alert('선택을 완료해주세요');
+      return;
+    }
     const tagIds = Array.from(review.taste ?? []);
     mutation.mutate({ hotLevel: review.level as LEVEL, tagIds, foodId });
   };
+
+  useEffect(() => {
+    if (!review.level || !review.taste || !review.taste.size) {
+      setIsTestDone(false);
+      return;
+    }
+    setIsTestDone(true);
+  }, [review]);
 
   return (
     <>
@@ -48,6 +67,7 @@ const ReviewWrite: NextPage<Food> = ({
       </Header>
 
       <FoodOverview {...food} />
+
       <SpicyLevelSection
         disabled={false}
         level={review?.level}
@@ -60,7 +80,7 @@ const ReviewWrite: NextPage<Food> = ({
 
       <Button
         buttonType="contained"
-        color="red"
+        color={isTestDone ? 'red' : 'grey'}
         rounded={false}
         css={css`
           width: 100%;
