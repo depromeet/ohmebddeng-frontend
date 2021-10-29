@@ -94,10 +94,12 @@ const Review: NextPage = () => {
                     level={data?.level}
                     onChange={handleCheckLevel(foodName)}
                   />
-                  <TasteForm
-                    taste={data?.taste}
-                    onChange={handleCheckTaste(foodName)}
-                  />
+                  <Divider>
+                    <TasteForm
+                      taste={data?.taste}
+                      onChange={handleCheckTaste(foodName)}
+                    />
+                  </Divider>
                 </ReviewSection>
               );
             })}
@@ -129,10 +131,14 @@ const ReviewContainer = styled.div`
   gap: 20px 0;
 `;
 
+const Divider = styled.div`
+  border-top: ${({ theme }) => `2px solid ${theme.colors.grey40}`};
+`;
+
 const ReviewSection = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 25px 0;
+  gap: 40px 0;
   width: 100%;
   min-height: 315px;
   background-color: rgba(255, 255, 255, 0.1);
