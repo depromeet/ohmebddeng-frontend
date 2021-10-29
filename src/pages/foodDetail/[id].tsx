@@ -25,16 +25,15 @@ const FoodDetail: NextPage = () => {
 
   const { data: counts } = useQuery<FoodCounts>(
     ['FoodCounts', id, selectedLevel],
-    () => getFoodCountsQuery(id as string, selectedLevel)
+    () => getFoodCountsQuery(id as string, selectedLevel),
+    { enabled: !!id }
   );
 
-  const { data: food } = useQuery<FoodDetails>(['FoodDetails', id], () =>
-    getFoodDetail(id as string)
+  const { data: food } = useQuery<FoodDetails>(
+    ['FoodDetails', id],
+    () => getFoodDetail(id as string),
+    { enabled: !!id }
   );
-
-  useEffect(() => {
-    console.log(isDropDownOpend);
-  }, [isDropDownOpend]);
 
   const handleSelectLevel = (level: USER_LEVEL) => () => {
     setSelectedLevel(level);

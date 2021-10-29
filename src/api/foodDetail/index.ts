@@ -19,7 +19,6 @@ export interface FoodDetails {
 }
 
 export const getFoodDetail = async (foodId: string) => {
-  if (!foodId) return {} as FoodDetails;
   const { data } = await apiClient.get<FoodDetails>(`/food/${foodId}`);
   return data;
 };
