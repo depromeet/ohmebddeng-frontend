@@ -2,20 +2,14 @@ import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import React, { useCallback } from 'react';
 import { ROUTES } from '@/constants';
-import { TASTE } from '@/types';
-
-interface TasteData {
-  taste: TASTE;
-  count: number;
-}
 
 export interface TasteEvaluationProps {
-  testData: TasteData[];
+  countData: any;
+  totalCount: number;
 }
 
-const TasteEvaluation = ({ testData }: TasteEvaluationProps) => {
+const TasteEvaluation = ({ countData, totalCount }: TasteEvaluationProps) => {
   const router = useRouter();
-  const totalCount = testData.reduce((r, c) => r + c.count, 0);
   const handleClick = useCallback(() => {
     router.push(ROUTES.REVIEW_WRITE);
   }, [router]);
@@ -27,9 +21,9 @@ const TasteEvaluation = ({ testData }: TasteEvaluationProps) => {
         <ReviewBtn onClick={handleClick}>리뷰 작성하기</ReviewBtn>
       </TasteContainer>
       <TasteContantList>
-        {testData.map(({ taste, count }) => (
+        {Object.keys(countData).map((taste) => (
           <TasteContant key={taste}>
-            {taste}({count})
+            {taste}({countData[taste]})
           </TasteContant>
         ))}
       </TasteContantList>
