@@ -31,8 +31,8 @@ export enum USER_LEVEL {
   맵찔이 = '맵찔이',
   맵초보 = '맵초보',
   맵러버 = '맵러버',
-  맵마스터 = '맵마스터',
   맵부심 = '맵부심',
+  맵마스터 = '맵마스터',
 }
 
 export interface ReviewState {
