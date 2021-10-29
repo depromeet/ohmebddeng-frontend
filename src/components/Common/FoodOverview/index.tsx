@@ -9,14 +9,21 @@ interface FoodOverviewProps extends Food {
 }
 
 const FoodOverview = ({
-  image_url,
+  imageUrl,
   name,
+  subName,
   nameVisable = true,
 }: FoodOverviewProps) => {
   return (
     <Container>
-      <Image src={image_url} alt={name} width={124} height={170} />
-      {nameVisable && <p>{name}</p>}
+      <Image src={imageUrl} alt={name} width={124} height={170} />
+      {nameVisable && (
+        <p>
+          {name}
+          <br />
+          <span>{subName}</span>
+        </p>
+      )}
     </Container>
   );
 };
@@ -34,6 +41,11 @@ const Container = styled.section`
     font-size: 32px;
     line-height: 140%;
     color: ${theme.colors.grey0};
+
+    & span {
+      font-family: SBAggroB;
+      font-size: 26px;
+    }
   }
 `;
 
