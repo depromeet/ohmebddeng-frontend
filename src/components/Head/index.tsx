@@ -17,7 +17,7 @@ export default function DefaultHead() {
         description,
         images: [
           {
-            url,
+            url: `${url}/assets/OpenGraph/image.png`,
             width: 1200,
             height: 630,
             alt: '오맵땡',

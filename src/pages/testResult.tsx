@@ -3,12 +3,10 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { Loading, Header } from '@/components/Common';
+import TestResultHead from '@/components/Head/testResultHead';
 import Button from '@/components/Input/Button';
 import { ROUTES } from '@/constants';
 import { FOOD_IMAGE } from '@/constants/image';
-import { initMSW } from '@/lib/msw';
-
-initMSW();
 
 const TestResult: NextPage = () => {
   const [isResult, setIsResult] = useState<boolean>(false);
@@ -56,6 +54,7 @@ const TestResult: NextPage = () => {
 
   return (
     <>
+      <TestResultHead level={Number(userLevel)} />
       <Header type="center">
         <span>당신의 레벨은?</span>
       </Header>
