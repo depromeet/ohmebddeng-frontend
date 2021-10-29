@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
+import { useMutation } from 'react-query';
+import { postInitialReviewQuery } from '@/api/initialReview';
 import { Header, SpicyLevelSection } from '@/components/Common';
 import FoodOverview from '@/components/Common/FoodOverview';
 import Button from '@/components/Input/Button';
@@ -14,11 +16,15 @@ const ReviewWrite: NextPage<Food> = ({
   imageUrl = '/assets/FoodReview/0.svg',
   name = '진라면',
   subName = '순한맛',
-  id = '1',
 }) => {
   const router = useRouter();
-  const [review, setReview] = useState<ReviewState>({ taste: new Set() });
-  const food = { imageUrl, name, subName, id } as Food;
+  const foodId = router.query.id as string;
+  const [review, setReview] = useState<ReviewState>({});
+  const food = { imageUrl, name, subName } as Food;
+
+  const mutation = useMutation(postInitialReviewQuery, {
+    onSuccess: () => router.push(`${ROUTES.FOOD_DETAIL}/${foodId}`),
+  });
 
   const handleCheckLevel = (event: React.ChangeEvent<HTMLInputElement>) => {
     const level = (event.target as HTMLInputElement).value as LEVEL;
@@ -30,10 +36,10 @@ const ReviewWrite: NextPage<Food> = ({
     taste.has(targetTaste) ? taste.delete(targetTaste) : taste.add(targetTaste);
     setReview({ ...review, taste });
   };
-  const handleClick = useCallback(() => {
-    router.push(ROUTES.MAIN);
-  }, [router]);
-
+  const handleSubmit = () => {
+    const tagIds = Array.from(review.taste ?? []);
+    mutation.mutate({ hotLevel: review.level as LEVEL, tagIds, foodId });
+  };
   return (
     <>
       <Header type="center">
@@ -58,7 +64,7 @@ const ReviewWrite: NextPage<Food> = ({
         css={css`
           width: 100%;
         `}
-        onClick={handleClick}
+        onClick={handleSubmit}
       >
         등록
       </Button>

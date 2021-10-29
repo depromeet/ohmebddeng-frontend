@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import { postInitialReviewQuery, CreatedReview } from '@/api/initialReview';
+import { postInitialReviewsQuery, CreatedReview } from '@/api/initialReview';
 import { getLevelTestFoodsQuery, LevelTestFoods } from '@/api/levelTest';
 import { Header, SpicyLevelForm } from '@/components/Common';
 import Button from '@/components/Input/Button';
@@ -23,7 +23,7 @@ const Review: NextPage = () => {
     getLevelTestFoodsQuery()
   );
 
-  const mutation = useMutation(postInitialReviewQuery, {
+  const mutation = useMutation(postInitialReviewsQuery, {
     onSuccess: () => router.push(ROUTES.TEST_RESULT),
   });
 
