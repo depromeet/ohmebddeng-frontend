@@ -58,6 +58,7 @@ const Review: NextPage = () => {
       const tagIds = Array.from(taste);
       result.push({ hotLevel: level, tagIds, foodId: foodInfo.get(foodName) });
     });
+    console.log(result);
     mutation.mutate(result);
   };
 

@@ -2,24 +2,17 @@ import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import React, { useCallback } from 'react';
 import { ROUTES } from '@/constants';
-import { TASTE } from '@/types';
-
-interface TasteData {
-  taste: TASTE;
-  count: number;
-}
 
 export interface TasteEvaluationProps {
-  testData: TasteData[];
-  foodId: string;
+  countData: any;
+  totalCount: number;
 }
 
-const TasteEvaluation = ({ testData, foodId }: TasteEvaluationProps) => {
+const TasteEvaluation = ({ countData, totalCount }: TasteEvaluationProps) => {
   const router = useRouter();
-  const totalCount = testData.reduce((r, c) => r + c.count, 0);
-  const handleClick = () => {
-    router.push(`${ROUTES.REVIEW_WRITE}/${foodId}`);
-  };
+  const handleClick = useCallback(() => {
+    router.push(ROUTES.REVIEW_WRITE);
+  }, [router]);
 
   return (
     <>
@@ -28,9 +21,9 @@ const TasteEvaluation = ({ testData, foodId }: TasteEvaluationProps) => {
         <ReviewBtn onClick={handleClick}>리뷰 작성하기</ReviewBtn>
       </TasteContainer>
       <TasteContantList>
-        {testData.map(({ taste, count }) => (
+        {Object.keys(countData).map((taste) => (
           <TasteContant key={taste}>
-            {taste}({count})
+            {taste}({countData[taste]})
           </TasteContant>
         ))}
       </TasteContantList>
