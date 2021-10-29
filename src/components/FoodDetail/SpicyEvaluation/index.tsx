@@ -1,31 +1,25 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { SpicyLevelIcon } from '@/components/Common';
-import { TASTE_LEVEL } from '@/types';
-
-interface TasteData {
-  level: TASTE_LEVEL;
-  count: number;
-}
 
 export interface SpicyEvalutationProps {
   totalCount: number;
-  testData: TasteData[];
+  countData: any;
 }
 
-const SpicyEvaluation = ({ totalCount, testData }: SpicyEvalutationProps) => {
+const SpicyEvaluation = ({ totalCount, countData }: SpicyEvalutationProps) => {
   const getPercentage = (count: number): number => (count / totalCount) * 100;
 
   return (
     <Container>
-      {testData.map(({ level, count }) => (
+      {Object.keys(countData).map((level) => (
         <Item key={level}>
           <SpicyLevelIcon level={level} checked={true} width={28} height={28} />
           <Level>{level}</Level>
           <Progress>
-            <Bar width={getPercentage(count)} />
+            <Bar width={getPercentage(countData[level])} />
           </Progress>
-          <Number>{count}</Number>
+          <Number>{countData[level]}</Number>
         </Item>
       ))}
     </Container>

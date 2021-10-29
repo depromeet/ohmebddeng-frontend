@@ -3,27 +3,12 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState, useRef } from 'react';
+import { useQuery } from 'react-query';
+import { getFoodCountsQuery, FoodCounts } from '@/api/foodDetail';
 import { Header } from '@/components/Common';
 import { SpicyEvaluation, TasteEvaluation } from '@/components/FoodDetail';
-import { TASTE_LEVEL, USER_LEVEL, TASTE } from '@/types';
+import { USER_LEVEL } from '@/types';
 import arrow_under from 'public/assets/common/arrow_under.svg';
-
-const data = {
-  tasteLevel: [
-    { level: TASTE_LEVEL.냠냠, count: 5 },
-    { level: TASTE_LEVEL.쓰읍, count: 3 },
-    { level: TASTE_LEVEL.씁하, count: 7 },
-    { level: TASTE_LEVEL.헥헥, count: 2 },
-  ],
-  taste: [
-    { taste: TASTE.매콤달콤한, count: 5 },
-    { taste: TASTE.개운한, count: 3 },
-    { taste: TASTE.칼칼한, count: 7 },
-    { taste: TASTE.얼큰한, count: 2 },
-    { taste: TASTE.얼얼한, count: 7 },
-    { taste: TASTE.알싸한, count: 10 },
-  ],
-};
 
 const FoodDetail: NextPage = () => {
   const router = useRouter();
@@ -33,6 +18,14 @@ const FoodDetail: NextPage = () => {
     USER_LEVEL.맵마스터
   );
 
+  const { data: counts } = useQuery<FoodCounts>(
+    ['FoodCounts', id, selectedLevel],
+    () => getFoodCountsQuery(id as string, selectedLevel)
+  );
+
+  useEffect(() => {
+    console.log(counts);
+  }, [counts]);
   useEffect(() => {
     if (dropwdownRef.current?.style)
       dropwdownRef.current.style.display = 'none';
@@ -40,7 +33,6 @@ const FoodDetail: NextPage = () => {
 
   const handleSelectLevel = (level: USER_LEVEL) => () => {
     setSelectedLevel(level);
-    // 서버로 요청 보내서, 새로운 데이터를 받아온다.
     handleToggleDropDown();
   };
 
@@ -82,8 +74,18 @@ const FoodDetail: NextPage = () => {
             </DropDownContent>
           </div>
         </UserLevelContainer>
-        <SpicyEvaluation testData={data.tasteLevel} totalCount={17} />
-        <TasteEvaluation testData={data.taste} />
+        {counts?.data && (
+          <>
+            <SpicyEvaluation
+              countData={counts?.data.hotLevelCount}
+              totalCount={17}
+            />
+            <TasteEvaluation
+              countData={counts?.data.tasteTagCount}
+              totalCount={17}
+            />
+          </>
+        )}
       </Container>
     </>
   );

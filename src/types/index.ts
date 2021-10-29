@@ -35,6 +35,14 @@ export enum USER_LEVEL {
   맵마스터 = '맵마스터',
 }
 
+export enum USER_LEVEL_NUMBER {
+  맵찔이,
+  맵초보,
+  맵러버,
+  맵부심,
+  맵마스터,
+}
+
 export interface ReviewState {
   level?: LEVEL;
   taste?: Set<TASTE>;
