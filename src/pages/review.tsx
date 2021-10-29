@@ -14,15 +14,13 @@ import { LEVEL, TASTE, ReviewState } from '@/types';
 import svg_0 from 'public/assets/FoodReview/0.svg';
 
 const foodInfo = new Map();
-const SIZE = 5;
 
 const Review: NextPage = () => {
   const router = useRouter();
   const [isTestDone, setIsTestDone] = useState(false);
   const [reviews, setReviews] = useState<Map<string, ReviewState>>(new Map());
-  const { data: foods } = useQuery<LevelTestFoods>(
-    ['initialReviewFoods', SIZE],
-    () => getLevelTestFoodsQuery(SIZE)
+  const { data: foods } = useQuery<LevelTestFoods>(['initialReviewFoods'], () =>
+    getLevelTestFoodsQuery()
   );
 
   const mutation = useMutation(postInitialReviewQuery, {
@@ -31,11 +29,10 @@ const Review: NextPage = () => {
 
   useEffect(() => {
     if (foods?.data) {
-      const { foodList } = foods.data;
       const map = new Map();
-      foodList.forEach(({ name, id }) => {
-        map.set(name, {});
-        foodInfo.set(name, id);
+      foods.data.forEach(({ name, subName, id }) => {
+        map.set(`${name} ${subName}`, {});
+        foodInfo.set(`${name} ${subName}`, id);
         setReviews(map);
       });
     }
@@ -90,7 +87,7 @@ const Review: NextPage = () => {
   return (
     <>
       <Header type="center">
-        <span>리뷰 {SIZE}개만 부탁해...</span>
+        <span>리뷰 {foods?.data.length}개만 부탁해...</span>
       </Header>
       <Container>
         <ReviewContainer>
