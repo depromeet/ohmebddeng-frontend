@@ -9,6 +9,12 @@ export interface CreatedReview {
 }
 
 // 리뷰 결과 보내는 쿼리 작성
-export const postInitialReviewQuery = async (reviewResult: CreatedReview[]) => {
+export const postInitialReviewQuery = async (reviewList: CreatedReview) => {
   const userId = localStorage.getItem(userIdKey);
+  const { data } = await apiClient.post<User>('/review/foods', {
+    userId,
+    reviewList,
+  });
+
+  return data;
 };

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import { postInitialReviewQuery } from '@/api/initialReview';
+import { postInitialReviewQuery, CreatedReview } from '@/api/initialReview';
 import { getLevelTestFoodsQuery, LevelTestFoods } from '@/api/levelTest';
 import { Header, SpicyLevelForm } from '@/components/Common';
 import Button from '@/components/Input/Button';
@@ -18,12 +18,18 @@ const SIZE = 4;
 
 const Review: NextPage = () => {
   const router = useRouter();
-  const [isAllChecked, setIsAllChecked] = useState(false);
+  const [result, setResult] = useState({});
+  const [isTestDone, setIsTestDone] = useState(false);
   const [reviews, setReviews] = useState<Map<string, ReviewState>>(new Map());
   const { data: foods } = useQuery<LevelTestFoods>(
     ['initialReviewFoods', SIZE],
     () => getLevelTestFoodsQuery(SIZE)
   );
+
+  const mutation = useMutation(postInitialReviewQuery, {
+    onSuccess: () =>
+      router.push({ pathname: ROUTES.TEST_RESULT, query: { level: 1 } }),
+  });
 
   useEffect(() => {
     if (foods?.data) {
@@ -40,20 +46,27 @@ const Review: NextPage = () => {
   useEffect(() => {
     for (const [_, { level, taste }] of Array.from(reviews.entries())) {
       if (!level || !taste || !taste.size) {
-        setIsAllChecked(false);
+        setIsTestDone(false);
         return;
       }
     }
-    setIsAllChecked(true);
+    setIsTestDone(true);
   }, [reviews]);
 
   const handleSubmit = () => {
-    if (!isAllChecked) {
+    if (!isTestDone) {
       alert('선택을 완료해주세요');
       return;
     }
-    //TODO. 리뷰 결과로 만들어진 레벨을 push와 함께 테스트결과 페이지로 전송해야함
-    router.push({ pathname: ROUTES.TEST_RESULT, query: { level: 1 } });
+    let result = {} as CreatedReview;
+    reviews.forEach(({ level, taste }, foodName) => {
+      const tagIds = taste ? Array.from(taste) : [];
+      result = {
+        ...result,
+        [foodInfo.get(foodName)]: { hotLevel: level, tagIds },
+      };
+    });
+    mutation.mutate(result);
   };
 
   const handleCheckLevel =
@@ -111,7 +124,7 @@ const Review: NextPage = () => {
         </ReviewContainer>
         <Button
           buttonType={'contained'}
-          color={isAllChecked ? 'red' : 'grey'}
+          color={isTestDone ? 'red' : 'grey'}
           rounded={false}
           onClick={handleSubmit}
         >
