@@ -4,11 +4,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import {
-  getInitialReviewFoodQuery,
-  InitialReviewFood,
-  postInitialReviewQuery,
-} from '@/api/initialReview';
+import { postInitialReviewQuery } from '@/api/initialReview';
+import { getLevelTestFoodsQuery, LevelTestFoods } from '@/api/levelTest';
 import { Header, SpicyLevelForm } from '@/components/Common';
 import Button from '@/components/Input/Button';
 import { TasteForm } from '@/components/Review';
@@ -16,15 +13,16 @@ import { ROUTES } from '@/constants';
 import { LEVEL, TASTE, ReviewState } from '@/types';
 import svg_0 from 'public/assets/FoodReview/0.svg';
 
-const foodInfo = new Map();
+const foodInfo = new Map(); // FoodName - Id 연결
+const SIZE = 4;
 
 const Review: NextPage = () => {
   const router = useRouter();
   const [isAllChecked, setIsAllChecked] = useState(false);
   const [reviews, setReviews] = useState<Map<string, ReviewState>>(new Map());
-  const { data: foods } = useQuery<InitialReviewFood>(
-    ['initialReviewFoods'],
-    () => getInitialReviewFoodQuery()
+  const { data: foods } = useQuery<LevelTestFoods>(
+    ['initialReviewFoods', SIZE],
+    () => getLevelTestFoodsQuery(SIZE)
   );
 
   useEffect(() => {
