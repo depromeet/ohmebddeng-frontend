@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import type { NextPage } from 'next';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
@@ -9,6 +10,7 @@ import TestResultHead from '@/components/Head/testResultHead';
 import Button from '@/components/Input/Button';
 import { ROUTES } from '@/constants';
 import { FOOD_IMAGE } from '@/constants/image';
+import share from 'public/assets/TestResult/share.svg';
 
 const TestResult: NextPage = () => {
   const [isResult, setIsResult] = useState<boolean>(false);
@@ -16,8 +18,9 @@ const TestResult: NextPage = () => {
 
   const { status, data } = useQuery<User>('getUserData', getUserData);
 
+  const userLevel = data?.data?.userLevel?.level as number;
   // 데이터 없으면 ..?.
-  const info = levelInfo[data?.data?.userLevel?.level as number];
+  const info = levelInfo[userLevel];
 
   const goHome = () => {
     router.push(ROUTES.MAIN);
@@ -52,9 +55,9 @@ const TestResult: NextPage = () => {
 
   useEffect(() => {
     if (status !== 'loading') {
-      // setTimeout(() => {
-      //   setIsResult(true);
-      // }, 2000);
+      setTimeout(() => {
+        setIsResult(true);
+      }, 2000);
     }
   }, [status]);
 
@@ -103,8 +106,7 @@ const TestResult: NextPage = () => {
                 color="red"
                 rounded
                 fullWidth
-                onClick={goHome}
-              >
+                onClick={goHome}>
                 홈으로
               </Button>
               <Button
@@ -112,16 +114,20 @@ const TestResult: NextPage = () => {
                 buttonType="contained"
                 color="red"
                 rounded
-                onClick={shareMyResult}
-              >
-                맵순위 공유하기
+                onClick={shareMyResult}>
+                <div className="test-result__buttons__center">
+                  <Image src={share} alt="error" layout="fixed" />
+                  <span>맵레벨 공유하기</span>
+                </div>
               </Button>
             </div>
           </TestResultWrapper>
         ) : (
           <div className="loading-box">
             <p>맵레벨을 측정 하고 있어요</p>
-            <Loading />
+            <div>
+              <Loading />
+            </div>
           </div>
         )}
       </Container>
@@ -130,7 +136,27 @@ const TestResult: NextPage = () => {
 };
 
 const Container = styled.div`
+  height: 100%;
+  position: relative;
+  margin-top: 30px;
   padding: 0 16px;
+
+  .loading-box {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    p {
+      font-size: 15px;
+    }
+
+    div {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+    }
+  }
 `;
 
 const TestResultWrapper = styled.div`
@@ -185,8 +211,11 @@ const TestResultWrapper = styled.div`
           margin-top: 5px;
         }
       }
+      ul > li + li {
+        margin-top: 15px;
+      }
+
       &.outline {
-        background: ${({ theme }) => theme.colors.background};
         border: 1px solid white;
       }
     }
@@ -195,20 +224,15 @@ const TestResultWrapper = styled.div`
       button + button {
         margin-top: 12px;
       }
-    }
-  }
+      &__center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-  .loading-box {
-    width: 100%;
-    margin-top: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    p {
-      font-size: 15px;
-      margin-bottom: 50px;
+        & > span {
+          margin-left: 20px;
+        }
+      }
     }
   }
 `;
