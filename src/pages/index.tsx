@@ -1,15 +1,27 @@
 import { css, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import type { NextPage } from 'next';
+import type { InferGetServerSidePropsType } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useCallback } from 'react';
+import { useQuery } from 'react-query';
+import { getUserCount, UserCount } from '@/api/user';
 import Button from '@/components/Input/Button';
 import { ROUTES } from '@/constants';
 import logo from '@public/images/logo.png';
 import userLevel5 from '@public/images/user-level-5.png';
 
-const Home: NextPage = () => {
+export const getServerSideProps = async () => {
+  const userCount = await getUserCount();
+
+  return {
+    props: { userCount },
+  };
+};
+
+const Home = ({
+  userCount,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const theme = useTheme();
 
@@ -21,7 +33,9 @@ const Home: NextPage = () => {
     router.push(ROUTES.MAIN);
   }, [router]);
 
-  // TODO: fetch user count info
+  const { data } = useQuery<UserCount>('getUserCount', getUserCount, {
+    initialData: userCount,
+  });
 
   return (
     <Container>
@@ -52,7 +66,7 @@ const Home: NextPage = () => {
           당신에게 맞는 매운 음식,,추천해줄게,,
         </p>
 
-        <SpeachBubble>N명 참여중!</SpeachBubble>
+        <SpeachBubble>{data?.count}명 참여중!</SpeachBubble>
       </div>
 
       <div

@@ -15,7 +15,7 @@ const TasteTagInput = ({
 }: TasteTagInputProps) => {
   return (
     <Container checked={checked}>
-      <Input type={type ?? 'checkbox'} name={name} value={name} {...rest} />#{' '}
+      <Input type={type ?? 'checkbox'} name={name} value={name} {...rest} />
       {name}
     </Container>
   );

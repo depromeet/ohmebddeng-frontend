@@ -1,8 +1,12 @@
 import styled from '@emotion/styled';
 import type { NextPage } from 'next';
+import Image from 'next/image';
+import { useState } from 'react';
 import Slider from 'react-slick';
+import { Header, Drawer } from '@/components/Common';
 import { Category, ProfileCard } from '@/components/Main';
 import { USER_LEVEL } from '@/types';
+import drawer_navigator from 'public/assets/common/hamburger.svg';
 import svg_0 from 'public/assets/Main/0.svg';
 import svg_1 from 'public/assets/Main/1.svg';
 import svg_2 from 'public/assets/Main/2.svg';
@@ -58,20 +62,51 @@ const sliderSetting = {
 };
 
 const Main: NextPage = () => {
+  const [isTest] = useState(false);
+  const [drawerOpend, setDrawerOpend] = useState(false);
+
+  const handleDrawerOpen = () => setDrawerOpend(true);
+  const hanldeDrawerClose = () => setDrawerOpend(false);
+
   return (
-    <Container>
-      <Slider {...sliderSetting}>
-        {Object.values(USER_LEVEL).map((level) => (
-          <ProfileCard level={level} key={level} />
-        ))}
-      </Slider>
-      <Category title={Recommend.title} contents={Recommend.contents} />
-      <Category
-        title={Random.title}
-        contents={Random.contents}
-        height={Random.height}
-      />
-    </Container>
+    <>
+      <Drawer closeDrawerHandler={hanldeDrawerClose} isOpen={drawerOpend} />
+      <Header type="side">
+        <h2>오맵땡</h2>
+        <Image
+          src={drawer_navigator}
+          alt="drawer_navigator"
+          layout="fixed"
+          onClick={handleDrawerOpen}
+        />
+      </Header>
+      <Container>
+        {isTest ? (
+          <>
+            <Slider {...sliderSetting}>
+              {Object.values(USER_LEVEL).map((level) => (
+                <ProfileCard level={level} key={level} />
+              ))}
+            </Slider>
+            <Category {...Recommend} />
+            <Category {...Random} />
+          </>
+        ) : (
+          <>
+            <Slider {...sliderSetting}>
+              {Object.values(USER_LEVEL).map((level) => (
+                <ProfileCard level={level} key={level} />
+              ))}
+            </Slider>
+            <Category
+              disabled
+              title={Recommend.title}
+              contents={Recommend.contents.slice(0, 2)}
+            />
+          </>
+        )}
+      </Container>
+    </>
   );
 };
 
@@ -83,5 +118,4 @@ const Container = styled.div`
   gap: 30px 0;
   overflow: hidden;
 `;
-
 export default Main;

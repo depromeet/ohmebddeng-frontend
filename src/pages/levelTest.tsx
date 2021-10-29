@@ -1,5 +1,4 @@
 import { css, useTheme } from '@emotion/react';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
@@ -9,8 +8,8 @@ import {
   postLevelTestQuery,
 } from '@/api/levelTest';
 import { AnonymousUser, getAnonymousUserQuery } from '@/api/user';
-import { TitleBar } from '@/components/Common';
-import { SpicyLevelForm } from '@/components/Review';
+import { Header, SpicyLevelSection } from '@/components/Common';
+import FoodOverview from '@/components/Common/FoodOverview';
 import { ROUTES } from '@/constants';
 import { LEVEL } from '@/types';
 
@@ -63,9 +62,9 @@ export default function LevelTestPage() {
       {
         foods?.data.foodList.map((food) => (
           <div key={food.id}>
-            <TitleBar backButton={false}>
+            <Header type="center">
               맵레벨 테스트 ({step}/{foods.data.foodList.length})
-            </TitleBar>
+            </Header>
             <div
               css={css`
                 width: 100%;
@@ -82,59 +81,12 @@ export default function LevelTestPage() {
                 `}
               />
             </div>
-
-            <section
-              css={css`
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding: 62px 54px;
-              `}
-            >
-              <Image
-                src={food.image_url}
-                alt={food.name}
-                width={124}
-                height={170}
-              />
-              <p
-                css={css`
-                  font-family: SBAggroB;
-                  font-weight: normal;
-                  padding-top: 18px;
-                  font-size: 32px;
-                  line-height: 140%;
-                  color: ${theme.colors.grey0};
-                `}
-              >
-                {food.name}
-              </p>
-            </section>
-
-            <section
-              css={css`
-                margin: 0 16px;
-                padding: 24px 26px;
-                background-color: rgba(255, 255, 255, 0.1);
-                border-radius: 14px;
-              `}
-            >
-              <h3
-                css={css`
-                  margin-bottom: 26px;
-                  font-weight: 800;
-                  font-size: 17px;
-                  color: ${theme.colors.white};
-                `}
-              >
-                얼마나 맵게 느껴지나요?
-              </h3>
-              <SpicyLevelForm
-                level={level}
-                onChange={goToNextStep(food.id)}
-                disabled={!!level}
-              />
-            </section>
+            <FoodOverview {...food} />
+            <SpicyLevelSection
+              level={level}
+              onChange={goToNextStep(food.id)}
+              disabled={!!level}
+            />
           </div>
         ))[index]
       }

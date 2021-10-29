@@ -9,3 +9,9 @@ export const apiClient = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+export type Response<T> = {
+  data: T;
+  statusCode: number;
+  message: string;
+};

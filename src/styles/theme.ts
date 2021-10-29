@@ -11,6 +11,8 @@ const theme = {
     grey40: '#3A3A3C',
     grey50: '#2C2C2E',
     grey60: '#1C1C1E',
+    grey70: '#C4C4C4',
+    background: 'rgba(255, 255, 255, 0.1)',
   },
 };
 
