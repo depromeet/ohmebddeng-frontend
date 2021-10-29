@@ -43,14 +43,10 @@ const CategoryByTaste: NextPage = () => {
                 width={52}
                 height={42}
               />
-              <div
-                css={css`
-                  margin-left: 26px;
-                `}
-              >
+              <FoodInfo>
                 <Name>{food.name}</Name>
                 <Info>{food.description}</Info>
-              </div>
+              </FoodInfo>
             </FoodItem>
           ))}
         </Lists>
@@ -92,6 +88,9 @@ const Lists = styled.ul`
 `;
 const FoodItem = styled.div`
   display: flex;
+`;
+const FoodInfo = styled.div`
+  margin-left: 26px;
 `;
 const Name = styled.div`
   margin-bottom: 8px;
