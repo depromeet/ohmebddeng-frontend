@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
+import { useQuery } from 'react-query';
+import { getUserData, User } from '@/api/user';
 import { Loading, Header } from '@/components/Common';
 import TestResultHead from '@/components/Head/testResultHead';
 import Button from '@/components/Input/Button';
@@ -11,12 +13,14 @@ import { FOOD_IMAGE } from '@/constants/image';
 const TestResult: NextPage = () => {
   const [isResult, setIsResult] = useState<boolean>(false);
   const router = useRouter();
-  // as로 강제하지 않을 방법? HOC?
-  const userLevel = router.query.level as string;
-  const info = levelInfo[userLevel];
+
+  const { status, data } = useQuery<User>('getUserData', getUserData);
+
+  // 데이터 없으면 ..?.
+  const info = levelInfo[data?.data?.userLevel?.level as number];
 
   const goHome = () => {
-    router.push(ROUTES.HOME);
+    router.push(ROUTES.MAIN);
   };
 
   const shareMyResult = async () => {
@@ -47,10 +51,12 @@ const TestResult: NextPage = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsResult(true);
-    }, 100);
-  }, []);
+    if (status !== 'loading') {
+      // setTimeout(() => {
+      //   setIsResult(true);
+      // }, 2000);
+    }
+  }, [status]);
 
   return (
     <>
@@ -59,10 +65,10 @@ const TestResult: NextPage = () => {
         <span>당신의 레벨은?</span>
       </Header>
       <Container>
-        {isResult ? (
+        {isResult && info ? (
           <TestResultWrapper>
             <div className="test-result__image-box">
-              <img src={info.img} alt={`level_${userLevel}`} />
+              <img src={info.img} alt={`level_${data?.data?.userLevel}`} />
             </div>
             <div className="test-result__content-box outline">
               <h2>{info.title}</h2>
@@ -193,6 +199,7 @@ const TestResultWrapper = styled.div`
   }
 
   .loading-box {
+    width: 100%;
     margin-top: 200px;
     display: flex;
     flex-direction: column;
@@ -207,7 +214,7 @@ const TestResultWrapper = styled.div`
 `;
 
 type ResultText = {
-  level: string;
+  level: number;
 };
 
 const ResultText = ({ level }: ResultText) => {
@@ -252,7 +259,7 @@ type InfoType = {
   }[];
 };
 
-const levelInfo: { [key: string]: InfoType } = {
+const levelInfo: { [key: number]: InfoType } = {
   1: {
     img: '/images/lv1.png',
     title: '당신의 불타는 똥꼬',
