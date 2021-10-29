@@ -13,12 +13,11 @@ import { ROUTES } from '@/constants';
 import { LEVEL, TASTE, ReviewState } from '@/types';
 import svg_0 from 'public/assets/FoodReview/0.svg';
 
-const foodInfo = new Map(); // FoodName - Id 연결
-const SIZE = 4;
+const foodInfo = new Map();
+const SIZE = 5;
 
 const Review: NextPage = () => {
   const router = useRouter();
-  const [result, setResult] = useState({});
   const [isTestDone, setIsTestDone] = useState(false);
   const [reviews, setReviews] = useState<Map<string, ReviewState>>(new Map());
   const { data: foods } = useQuery<LevelTestFoods>(
@@ -27,8 +26,7 @@ const Review: NextPage = () => {
   );
 
   const mutation = useMutation(postInitialReviewQuery, {
-    onSuccess: () =>
-      router.push({ pathname: ROUTES.TEST_RESULT, query: { level: 1 } }),
+    onSuccess: () => router.push(ROUTES.TEST_RESULT),
   });
 
   useEffect(() => {
@@ -58,13 +56,10 @@ const Review: NextPage = () => {
       alert('선택을 완료해주세요');
       return;
     }
-    let result = {} as CreatedReview;
-    reviews.forEach(({ level, taste }, foodName) => {
-      const tagIds = taste ? Array.from(taste) : [];
-      result = {
-        ...result,
-        [foodInfo.get(foodName)]: { hotLevel: level, tagIds },
-      };
+    let result = [] as CreatedReview[];
+    reviews.forEach(({ level = LEVEL.냠냠, taste = [] }, foodName) => {
+      const tagIds = Array.from(taste);
+      result.push({ hotLevel: level, tagIds, foodId: foodInfo.get(foodName) });
     });
     mutation.mutate(result);
   };
@@ -95,7 +90,7 @@ const Review: NextPage = () => {
   return (
     <>
       <Header type="center">
-        <span>리뷰 5개만 부탁해...</span>
+        <span>리뷰 {SIZE}개만 부탁해...</span>
       </Header>
       <Container>
         <ReviewContainer>
