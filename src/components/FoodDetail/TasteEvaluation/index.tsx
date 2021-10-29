@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import React, { useCallback } from 'react';
 import { ROUTES } from '@/constants';
-import { TASTE } from '@/types';
 
 export interface TasteEvaluationProps {
   countData: any;

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { SpicyLevelIcon } from '@/components/Common';
+import { LEVEL } from '@/types';
 
 export interface SpicyEvalutationProps {
   totalCount: number;
@@ -14,7 +15,12 @@ const SpicyEvaluation = ({ totalCount, countData }: SpicyEvalutationProps) => {
     <Container>
       {Object.keys(countData).map((level) => (
         <Item key={level}>
-          <SpicyLevelIcon level={level} checked={true} width={28} height={28} />
+          <SpicyLevelIcon
+            level={level as LEVEL}
+            checked={true}
+            width={28}
+            height={28}
+          />
           <Level>{level}</Level>
           <Progress>
             <Bar width={getPercentage(countData[level])} />
