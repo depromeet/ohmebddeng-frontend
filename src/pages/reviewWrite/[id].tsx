@@ -40,6 +40,7 @@ const ReviewWrite: NextPage<Food> = ({
     const tagIds = Array.from(review.taste ?? []);
     mutation.mutate({ hotLevel: review.level as LEVEL, tagIds, foodId });
   };
+
   return (
     <>
       <Header type="center">

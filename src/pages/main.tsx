@@ -2,7 +2,9 @@ import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useQuery } from 'react-query';
 import Slider from 'react-slick';
+import { getUserQuery, User } from '@/api/user';
 import { Header, Drawer } from '@/components/Common';
 import { Category, ProfileCard } from '@/components/Main';
 import { USER_LEVEL } from '@/types';
@@ -57,13 +59,23 @@ const Random = {
   height: 104,
 };
 
+const UserLevelNumber: { [index: number]: USER_LEVEL } = {
+  1: USER_LEVEL.맵찔이,
+  2: USER_LEVEL.맵초보,
+  3: USER_LEVEL.맵러버,
+  4: USER_LEVEL.맵부심,
+  5: USER_LEVEL.맵마스터,
+};
+
 const sliderSetting = {
   dots: true,
 };
 
 const Main: NextPage = () => {
-  const [isTest] = useState(false);
   const [drawerOpend, setDrawerOpend] = useState(false);
+  const { data: user } = useQuery<User>(['getUser'], getUserQuery);
+
+  console.log(user?.data.userLevel.level);
 
   const handleDrawerOpen = () => setDrawerOpend(true);
   const hanldeDrawerClose = () => setDrawerOpend(false);
@@ -81,13 +93,9 @@ const Main: NextPage = () => {
         />
       </Header>
       <Container>
-        {isTest ? (
+        {user ? (
           <>
-            <Slider {...sliderSetting}>
-              {Object.values(USER_LEVEL).map((level) => (
-                <ProfileCard level={level} key={level} />
-              ))}
-            </Slider>
+            <ProfileCard level={UserLevelNumber[user.data.userLevel.level]} />
             <Category {...Recommend} />
             <Category {...Random} />
           </>
@@ -100,6 +108,7 @@ const Main: NextPage = () => {
             </Slider>
             <Category
               disabled
+              disabledText={'레벨테스트 받으면 맞춤형 음식 추천이!'}
               title={Recommend.title}
               contents={Recommend.contents.slice(0, 2)}
             />
