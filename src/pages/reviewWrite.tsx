@@ -11,26 +11,25 @@ import { ROUTES } from '@/constants';
 import { Food, LEVEL, ReviewState, TASTE } from '@/types';
 
 const ReviewWrite: NextPage<Food> = ({
-  image_url = '/assets/FoodReview/0.svg',
-  name = '진라면 순한맛',
+  imageUrl = '/assets/FoodReview/0.svg',
+  name = '진라면',
+  subName = '순한맛',
   id = '1',
 }) => {
   const router = useRouter();
   const [review, setReview] = useState<ReviewState>({ taste: new Set() });
-  const food = { image_url, name, id } as Food;
+  const food = { imageUrl, name, subName, id } as Food;
 
-  const handleCheckLevel =(event: React.ChangeEvent<HTMLInputElement>) => {
-      const level = (event.target as HTMLInputElement).value as LEVEL;
-      setReview({ ...review, level });
-    };
-  const handleCheckTaste =(event: React.ChangeEvent<HTMLInputElement>) => {
-      const targetTaste = (event.target as HTMLInputElement).value as TASTE;
-      const taste = review.taste ?? new Set();
-      taste.has(targetTaste)
-        ? taste.delete(targetTaste)
-        : taste.add(targetTaste);
-      setReview({ ...review, taste });
-    };
+  const handleCheckLevel = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const level = (event.target as HTMLInputElement).value as LEVEL;
+    setReview({ ...review, level });
+  };
+  const handleCheckTaste = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const targetTaste = (event.target as HTMLInputElement).value as TASTE;
+    const taste = review.taste ?? new Set();
+    taste.has(targetTaste) ? taste.delete(targetTaste) : taste.add(targetTaste);
+    setReview({ ...review, taste });
+  };
   const handleClick = useCallback(() => {
     router.push(ROUTES.MAIN);
   }, [router]);

@@ -22,8 +22,8 @@ export default function LevelTestPage() {
   const [result, setResult] = useState<{ [foodId: string]: LEVEL }>({});
   const [testIsDone, setTestIsDone] = useState(false);
   const { data: foods } = useQuery<LevelTestFoods>(
-    ['levelTestFoods', size],
-    () => getLevelTestFoodsQuery(size)
+    ['levelTestFoods'],
+    getLevelTestFoodsQuery
   );
 
   const goToNextStep = useCallback(
@@ -33,7 +33,7 @@ export default function LevelTestPage() {
       setLevel(selectedLevel);
       setResult({ ...result, [foodId]: selectedLevel });
 
-      if (foods && step < foods?.data.foodList.length) {
+      if (foods && step < foods?.data.length) {
         setTimeout(() => {
           setLevel(undefined);
           setStep((step) => step + 1);
@@ -60,10 +60,10 @@ export default function LevelTestPage() {
   return (
     <div>
       {
-        foods?.data.foodList.map((food) => (
+        foods?.data.map((food) => (
           <div key={food.id}>
             <Header type="center">
-              맵레벨 테스트 ({step}/{foods.data.foodList.length})
+              맵레벨 테스트 ({step}/{foods.data.length})
             </Header>
             <div
               css={css`
@@ -75,7 +75,7 @@ export default function LevelTestPage() {
             >
               <div
                 css={css`
-                  width: ${(100 / foods.data.foodList.length) * step}%;
+                  width: ${(100 / foods.data.length) * step}%;
                   height: 100%;
                   background-color: ${theme.colors.red};
                 `}
@@ -93,5 +93,3 @@ export default function LevelTestPage() {
     </div>
   );
 }
-
-const size = 12;
