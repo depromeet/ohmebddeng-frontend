@@ -9,7 +9,9 @@ export interface SpicyEvalutationProps {
 }
 
 const SpicyEvaluation = ({ totalCount, countData }: SpicyEvalutationProps) => {
-  const getPercentage = (count: number): number => (count / totalCount) * 100;
+  const getPercentage = (count: number): number => {
+    return count === 0 || totalCount === 0 ? 0 : (count / totalCount) * 100;
+  };
 
   return (
     <Container>

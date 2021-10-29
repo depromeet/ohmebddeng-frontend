@@ -5,19 +5,23 @@ export interface FoodCounts {
   data: {
     hotLevelCount: { string: number };
     tasteTagCount: { string: number };
+    totalHotLevelCount: number;
+    totalTasteTagCount: number;
   };
   statusCode: 200;
   message: 'Success';
 }
 
 export interface FoodDetails {
-  data: Food[];
+  data: Food;
   statusCode: 200;
   message: 'Success';
 }
 
 export const getFoodDetail = async (foodId: string) => {
-  const { data } = await apiClient.get<FoodDetails>(`/`);
+  if (!foodId) return {} as FoodDetails;
+  const { data } = await apiClient.get<FoodDetails>(`/food/${foodId}`);
+  return data;
 };
 
 export const getFoodCountsQuery = async (foodId: string, level: USER_LEVEL) => {
