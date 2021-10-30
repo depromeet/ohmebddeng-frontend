@@ -53,6 +53,18 @@ export interface User {
   message: string;
 }
 
+export const getUserQuery = async () => {
+  try {
+    const userId = localStorage.getItem(userIdKey);
+    const { data } = await apiClient.get<User>(`/user/${userId}`);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 export type UserCount = { count: number; levelTestedOnly: boolean };
 
 export const getUserCount = async () => {

@@ -106,7 +106,8 @@ const TestResult: NextPage = () => {
                 color="red"
                 rounded
                 fullWidth
-                onClick={goHome}>
+                onClick={goHome}
+              >
                 홈으로
               </Button>
               <Button
@@ -114,7 +115,8 @@ const TestResult: NextPage = () => {
                 buttonType="contained"
                 color="red"
                 rounded
-                onClick={shareMyResult}>
+                onClick={shareMyResult}
+              >
                 <div className="test-result__buttons__center">
                   <Image src={share} alt="error" layout="fixed" />
                   <span>맵레벨 공유하기</span>
