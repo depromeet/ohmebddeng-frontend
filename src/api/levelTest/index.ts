@@ -14,13 +14,16 @@ export const getLevelTestFoodsQuery = async () => {
   return data;
 };
 
-export const postLevelTestQuery = async (testResults: {
-  [foodId: string]: LEVEL;
-}) => {
+export const postLevelTestQuery = async (
+  answers: {
+    foodId: string;
+    hotLevel: LEVEL;
+  }[]
+) => {
   const userId = localStorage.getItem(userIdKey);
   const { data } = await apiClient.post<User>(`/user/level`, {
     userId,
-    testResults,
+    answers,
   });
 
   return data;

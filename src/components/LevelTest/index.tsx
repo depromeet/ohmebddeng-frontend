@@ -19,7 +19,9 @@ export default function LevelTestPage() {
   const [step, setStep] = useState(1);
   const index = useMemo(() => step - 1, [step]);
   const [level, setLevel] = useState<LEVEL | undefined>(undefined);
-  const [result, setResult] = useState<{ [foodId: string]: LEVEL }>({});
+  const [result, setResult] = useState<{ foodId: string; hotLevel: LEVEL }[]>(
+    []
+  );
   const [testIsDone, setTestIsDone] = useState(false);
   const { data: foods } = useQuery<LevelTestFoods>(
     ['levelTestFoods'],
@@ -31,7 +33,7 @@ export default function LevelTestPage() {
       const timeToDelay = 0.5 * 1000;
       const selectedLevel = e.target.value as LEVEL;
       setLevel(selectedLevel);
-      setResult({ ...result, [foodId]: selectedLevel });
+      setResult([...result, { foodId, hotLevel: selectedLevel }]);
 
       if (foods && step < foods?.data.length) {
         setTimeout(() => {
