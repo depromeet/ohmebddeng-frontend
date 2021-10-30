@@ -3,10 +3,11 @@ import styled from '@emotion/styled';
 import type { InferGetServerSidePropsType } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getUserCount, UserCount } from '@/api/user';
 import Button from '@/components/Input/Button';
+import LevelTestPage from '@/components/LevelTest';
 import { ROUTES } from '@/constants';
 import logo from '@public/images/logo.png';
 import userLevel5 from '@public/images/user-level-5.png';
@@ -24,10 +25,11 @@ const Home = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const theme = useTheme();
+  const [showTest, setShowTest] = useState(false);
 
-  const handleClickGoTest = useCallback(() => {
-    router.push(ROUTES.LEVEL_TEST);
-  }, [router]);
+  const handleClickDoTest = useCallback(() => {
+    setShowTest(true);
+  }, []);
 
   const handleClickSkip = useCallback(() => {
     router.push(ROUTES.MAIN);
@@ -38,69 +40,75 @@ const Home = ({
   });
 
   return (
-    <Container>
-      <Image src={logo} alt="오맵땡" width={100} height={52} />
-      <div
-        css={css`
-          padding-left: 4px;
-        `}
-      >
-        <h1
-          css={css`
-            margin: 24px 0 6px 0;
-            font-weight: bold;
-            font-size: 22px;
-            color: ${theme.colors.white};
-          `}
-        >
-          오늘 매운게 땡기는 당신..
-        </h1>
-        <p
-          css={css`
-            font-weight: bold;
-            font-size: 15px;
-            text-align: left;
-            color: ${theme.colors.grey10};
-          `}
-        >
-          당신에게 맞는 매운 음식,,추천해줄게,,
-        </p>
+    <>
+      {showTest ? (
+        <LevelTestPage />
+      ) : (
+        <Container>
+          <Image src={logo} alt="오맵땡" width={100} height={52} />
+          <div
+            css={css`
+              padding-left: 4px;
+            `}
+          >
+            <h1
+              css={css`
+                margin: 24px 0 6px 0;
+                font-weight: bold;
+                font-size: 22px;
+                color: ${theme.colors.white};
+              `}
+            >
+              오늘 매운게 땡기는 당신..
+            </h1>
+            <p
+              css={css`
+                font-weight: bold;
+                font-size: 15px;
+                text-align: left;
+                color: ${theme.colors.grey10};
+              `}
+            >
+              당신에게 맞는 매운 음식,,추천해줄게,,
+            </p>
 
-        <SpeachBubble>{data?.count}명 참여중!</SpeachBubble>
-      </div>
+            <SpeachBubble>{data?.count}명 참여중!</SpeachBubble>
+          </div>
 
-      <div
-        css={css`
-          position: relative;
-          top: -24px;
-          right: -116px;
-        `}
-      >
-        <Image src={userLevel5} width={314} height={290} alt="맵부심" />
-      </div>
+          <div
+            css={css`
+              position: relative;
+              top: -24px;
+              right: -116px;
+            `}
+          >
+            <Image src={userLevel5} width={314} height={290} alt="맵부심" />
+          </div>
 
-      <div
-        css={css`
-          position: absolute;
-          left: 16px;
-          right: 16px;
-          bottom: 66px;
-        `}
-      >
-        <Button
-          buttonType="contained"
-          color="red"
-          rounded
-          css={css`
-            width: 100%;
-          `}
-          onClick={handleClickGoTest}
-        >
-          내 맵레벨 알아보기
-        </Button>
-        <Skip onClick={handleClickSkip}>건너뛰기</Skip>
-      </div>
-    </Container>
+          <div
+            css={css`
+              position: absolute;
+              left: 16px;
+              right: 16px;
+              bottom: 66px;
+            `}
+          >
+            <Button
+              buttonType="contained"
+              color="red"
+              rounded
+              css={css`
+                width: 100%;
+              `}
+              onClick={handleClickDoTest}
+            >
+              내 맵레벨 알아보기
+            </Button>
+            <Skip onClick={handleClickSkip}>건너뛰기</Skip>
+          </div>
+        </Container>
+      )}
+    </>
   );
 };
 

@@ -37,6 +37,8 @@ const Label = styled.label`
   }
   & div.name {
     margin-top: 7px;
+    display: flex;
+    justify-content: center;
   }
   & div.disabled {
     color: ${({ theme }) => theme.colors.grey10};

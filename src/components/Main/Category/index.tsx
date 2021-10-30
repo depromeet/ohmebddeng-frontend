@@ -12,6 +12,7 @@ export interface ItemProps {
 
 export interface CategoryProps extends ItemProps {
   disabled?: boolean;
+  disabledText?: string;
   title: string;
   contents: {
     textFirst?: string;
@@ -22,6 +23,7 @@ export interface CategoryProps extends ItemProps {
 }
 const Category = ({
   disabled = false,
+  disabledText,
   title,
   contents,
   ...props
@@ -64,7 +66,7 @@ const Category = ({
           <>
             <DisabledBackGround></DisabledBackGround>
             <Disabled>
-              <Text>레벨테스트 받으면 맞춤형 음식 추천이!</Text>
+              <Text>{disabledText}</Text>
               <Button
                 buttonType="contained"
                 color="red"
