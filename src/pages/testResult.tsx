@@ -52,14 +52,15 @@ const TestResult: NextPage = () => {
     });
     console.log(sharePromise);
   };
-
+  console.log('status, data : ', status, data);
   useEffect(() => {
-    if (status !== 'loading') {
+    console.log('in useEffect ', status, data);
+    if (status !== 'loading' && data) {
       setTimeout(() => {
         setIsResult(true);
       }, 2000);
     }
-  }, [status]);
+  }, [status, data]);
 
   return (
     <>
@@ -106,7 +107,8 @@ const TestResult: NextPage = () => {
                 color="red"
                 rounded
                 fullWidth
-                onClick={goHome}>
+                onClick={goHome}
+              >
                 홈으로
               </Button>
               <Button
@@ -114,7 +116,8 @@ const TestResult: NextPage = () => {
                 buttonType="contained"
                 color="red"
                 rounded
-                onClick={shareMyResult}>
+                onClick={shareMyResult}
+              >
                 <div className="test-result__buttons__center">
                   <Image src={share} alt="error" layout="fixed" />
                   <span>맵레벨 공유하기</span>
