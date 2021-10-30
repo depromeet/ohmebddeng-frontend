@@ -43,5 +43,6 @@ export interface ReviewState {
 export interface Food {
   id: string;
   name: string;
-  image_url: string;
+  subName: string;
+  imageUrl: string;
 }

@@ -3,17 +3,13 @@ import { User, userIdKey } from '@/api/user';
 import { Food, LEVEL } from '@/types';
 
 export interface LevelTestFoods {
-  data: {
-    foodList: Food[];
-  };
+  data: Food[];
   statusCode: 200;
   message: 'Success';
 }
 
-export const getLevelTestFoodsQuery = async (size: number) => {
-  const { data } = await apiClient.get<LevelTestFoods>(
-    `/food/tests?size=${size}`
-  );
+export const getLevelTestFoodsQuery = async () => {
+  const { data } = await apiClient.get<LevelTestFoods>(`/food/tests`);
 
   return data;
 };

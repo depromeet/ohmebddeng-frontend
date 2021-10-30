@@ -3,17 +3,27 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState, useRef } from 'react';
-import { Header, FoodOverview } from '@/components/Common';
-import { SpicyEvaluation } from '@/components/FoodDetail';
-import { TASTE_LEVEL, USER_LEVEL } from '@/types';
+import { Header } from '@/components/Common';
+import { SpicyEvaluation, TasteEvaluation } from '@/components/FoodDetail';
+import { TASTE_LEVEL, USER_LEVEL, TASTE } from '@/types';
 import arrow_under from 'public/assets/common/arrow_under.svg';
 
-const data = [
-  { level: TASTE_LEVEL.냠냠, count: 5 },
-  { level: TASTE_LEVEL.쓰읍, count: 3 },
-  { level: TASTE_LEVEL.씁하, count: 7 },
-  { level: TASTE_LEVEL.헥헥, count: 2 },
-];
+const data = {
+  tasteLevel: [
+    { level: TASTE_LEVEL.냠냠, count: 5 },
+    { level: TASTE_LEVEL.쓰읍, count: 3 },
+    { level: TASTE_LEVEL.씁하, count: 7 },
+    { level: TASTE_LEVEL.헥헥, count: 2 },
+  ],
+  taste: [
+    { taste: TASTE.매콤달콤한, count: 5 },
+    { taste: TASTE.개운한, count: 3 },
+    { taste: TASTE.칼칼한, count: 7 },
+    { taste: TASTE.얼큰한, count: 2 },
+    { taste: TASTE.얼얼한, count: 7 },
+    { taste: TASTE.알싸한, count: 10 },
+  ],
+};
 
 const FoodDetail: NextPage = () => {
   const router = useRouter();
@@ -72,7 +82,8 @@ const FoodDetail: NextPage = () => {
             </DropDownContent>
           </div>
         </UserLevelContainer>
-        <SpicyEvaluation testData={data} totalCount={17} />
+        <SpicyEvaluation testData={data.tasteLevel} totalCount={17} />
+        <TasteEvaluation testData={data.taste} />
       </Container>
     </>
   );
